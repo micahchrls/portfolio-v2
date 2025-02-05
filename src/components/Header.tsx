@@ -1,6 +1,6 @@
-import ContentNav from "@/components/main/ContentNav";
-import Profile from "./main/Profile";
-import SocMedNav from "./main/SocMedNav";
+import ContentNav from "@/components/header-components/ContentNav";
+import Profile from "@/components/header-components/Profile";
+import SocMedNav from "@/components/header-components/SocMedNav";
 
 const Header = () => {
   return (
