@@ -2,12 +2,12 @@ import { ThemeToggle } from "@/components/theme/mode-toggle";
 
 export default function SocMedNav() {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center py-4">
       <ThemeToggle />
       <ul className="ml-1 xl:mt-8 flex items-center" aria-label="Social media">
         <li className="mr-5 shrink-0 text-xs">
           <a
-            className="block hover:text-slate-200"
+            className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
             href="https://github.com/bchiang7"
             target="_blank"
             rel="noreferrer noopener"
@@ -28,7 +28,7 @@ export default function SocMedNav() {
         </li>
         <li className="mr-5 shrink-0 text-xs">
           <a
-            className="block hover:text-slate-200"
+            className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
             href="https://www.linkedin.com/in/bchiang7/"
             target="_blank"
             rel="noreferrer noopener"
@@ -50,7 +50,7 @@ export default function SocMedNav() {
 
         <li className="mr-5 shrink-0 text-xs">
           <a
-            className="block hover:text-slate-200"
+            className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
             href="https://instagram.com/bchiang7"
             target="_blank"
             rel="noreferrer noopener"
