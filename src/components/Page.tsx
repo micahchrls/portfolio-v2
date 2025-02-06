@@ -1,14 +1,11 @@
 import Main from "@/components/Main"
 import Header from "@/components/Header"
-import { BackgroundBeams } from "@/components/ui/background-beams"
 import { motion } from "framer-motion";
+import { Chatbot } from "@/components/chatbot/Chatbot";
 
 const Page = () => {
   return (
     <>
-      {/* <div className="fixed inset-0 w-full h-full">
-        <BackgroundBeams className="opacity-40" />
-      </div> */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -23,6 +20,7 @@ const Page = () => {
           </div>
         </div>
       </motion.div>
+      <Chatbot />
     </>
   )
 }
