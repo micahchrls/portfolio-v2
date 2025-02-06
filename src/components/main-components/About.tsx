@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 interface ExternalLink {
@@ -36,7 +35,7 @@ const ExternalLink: React.FC<ExternalLink & { className?: string }> = ({
 );
 
 const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <p className="mb-6 text-zinc-600 dark:text-zinc-400">{children}</p>
+  <p className="mb-6 text-base leading-7 text-zinc-600 dark:text-zinc-400">{children}</p>
 );
 
 const SkillTag: React.FC<{ skill: string; index: number }> = ({ skill, index }) => (
@@ -44,7 +43,7 @@ const SkillTag: React.FC<{ skill: string; index: number }> = ({ skill, index }) 
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.3, delay: index * 0.1 }}
-    className="inline-block bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 rounded-full px-3 py-1 text-sm mr-2 mb-2 
+    className="inline-block bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 rounded-full px-3 py-1 text-sm mr-2 mb-2 
               hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 transition-colors duration-200"
   >
     {skill}
@@ -124,43 +123,42 @@ const About = () => {
         variants={container}
         initial="hidden"
         animate="show"
+        className="max-w-2xl"
       >
-        <motion.div variants={item}>
-          <Card className="border-none">
-            <CardContent>
-              <motion.div variants={item}>
-                <Paragraph>
-                  {aboutContent.intro}
-                </Paragraph>
-              </motion.div>
+        <motion.div variants={item} className="space-y-8">
+          <div className="space-y-6">
+            <motion.div variants={item}>
+              <Paragraph>
+                {aboutContent.intro}
+              </Paragraph>
+            </motion.div>
 
-              <motion.div variants={item}>
-                <Paragraph>
-                  {aboutContent.currentRole}{" "}
-                  <ExternalLink {...aboutContent.links.workplace} />, where I develop secure backend APIs and integrate PNPKI digital signatures for healthcare systems. Additionally, I serve as a part-time professor at Ateneo de Zamboanga University, teaching programming and mentoring the next generation of developers.
-                </Paragraph>
-              </motion.div>
+            <motion.div variants={item}>
+              <Paragraph>
+                {aboutContent.currentRole}{" "}
+                <ExternalLink {...aboutContent.links.workplace} />, where I develop secure backend APIs and integrate PNPKI digital signatures for healthcare systems. Additionally, I serve as a part-time professor at Ateneo de Zamboanga University, teaching programming and mentoring the next generation of developers.
+              </Paragraph>
+            </motion.div>
+          </div>
 
-              <motion.div variants={item}>
-                <div className="mt-6">
-                  <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 mb-3">Technical Stack:</h3>
-                  <div className="flex flex-wrap">
-                    {aboutContent.skills.map((skill, index) => (
-                      <SkillTag key={skill} skill={skill} index={index} />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+          <motion.div variants={item}>
+            <div className="space-y-3">
+              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Technical Stack</h3>
+              <div className="flex flex-wrap">
+                {aboutContent.skills.map((skill, index) => (
+                  <SkillTag key={skill} skill={skill} index={index} />
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
-              <motion.div variants={item} className="mt-6 flex gap-6">
-                <p className="text-sm text-zinc-600 dark:text-zinc-500">
-                  Explore my professional projects on{" "}
-                  <ExternalLink {...aboutContent.links.github} /> or visit my{" "}
-                  <ExternalLink {...aboutContent.links.portfolio} /> for detailed case studies.
-                </p>
-              </motion.div>
-            </CardContent>
-          </Card>
+          <motion.div variants={item}>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+              Explore my professional projects on{" "}
+              <ExternalLink {...aboutContent.links.github} /> or visit my{" "}
+              <ExternalLink {...aboutContent.links.portfolio} /> for detailed case studies.
+            </p>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

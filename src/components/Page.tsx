@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 const Page = () => {
   return (
     <>
-      <div className="fixed inset-0 w-full h-full">
+      {/* <div className="fixed inset-0 w-full h-full">
         <BackgroundBeams className="opacity-40" />
-      </div>
+      </div> */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

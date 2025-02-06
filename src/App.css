@@ -1,0 +1,14 @@
+/* Navigation active state glow effect */
+.shadow-glow {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.nav-indicator.shadow-glow::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: white;
+  filter: blur(4px);
+  opacity: 0.5;
+}
