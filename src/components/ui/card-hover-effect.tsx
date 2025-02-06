@@ -21,10 +21,9 @@ export const HoverEffect = ({
   return (
     <div className={cn("flex flex-col space-y-12", className)}>
       {items.map((item, idx) => (
-        <Link
-          to={item?.link}
-          key={item?.link}
-          className="group relative block w-full"
+        <div
+          key={item.link}
+          className="group relative block w-full cursor-pointer"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -37,37 +36,24 @@ export const HoverEffect = ({
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
-                  transition: { 
-                    duration: 0.2,
-                    ease: "easeOut"
-                  },
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
                 exit={{
                   opacity: 0,
-                  transition: { 
-                    duration: 0.15, 
-                    ease: "easeIn"
-                  },
+                  transition: { duration: 0.15, ease: "easeIn" },
                 }}
               />
             )}
           </AnimatePresence>
-          <div className="relative">
-            <Card>
-              <div className="group relative grid pb-1 sm:grid-cols-8 sm:gap-8 md:gap-4">
-                <header className="z-10 mb-2 mt-1 sm:col-span-2">
-                  <CardDescription duration={item.duration} />
-                </header>
-                <div className="z-10 sm:col-span-6">
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription skills={item.skills}>
-                    {item.description}
-                  </CardDescription>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </Link>
+          <Card>
+            <div className="relative z-10">
+              <CardTitle>{item.title}</CardTitle>
+              <CardDescription duration={item.duration} skills={item.skills}>
+                {item.description}
+              </CardDescription>
+            </div>
+          </Card>
+        </div>
       ))}
     </div>
   );

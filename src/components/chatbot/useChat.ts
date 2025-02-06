@@ -29,7 +29,7 @@ export const useChat = () => {
 
     try {
       const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-      return genAI.getGenerativeModel({ model: "gemini-pro" });
+      return genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Failed to initialize Gemini model";
       console.error("Failed to initialize Gemini model:", error);

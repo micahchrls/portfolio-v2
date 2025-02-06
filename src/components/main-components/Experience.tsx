@@ -23,7 +23,7 @@ export default function Experience() {
   const experienceItems = experiences.map((experience) => ({
     title: `${experience.role} · ${experience.company}`,
     description: experience.description,
-    link: "#",
+    link: `${experience.company.toLowerCase().replace(/\s+/g, '-')}-${experience.role.toLowerCase().replace(/\s+/g, '-')}`,
     duration: experience.duration,
     skills: experience.skills,
   }));

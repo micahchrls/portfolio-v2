@@ -40,18 +40,21 @@ const ProjectTitle = ({ children, href, github }: { children: React.ReactNode; h
 
 const projects = [
   {
+    key: 'leonora',
     title: <ProjectTitle href="https://leonorafinance.com/">Leonora</ProjectTitle>,
     description: 'A comprehensive personal finance platform featuring a loan management system. Built with focus on efficient data handling and optimal user experience.',
-    link: '#',
+    link: 'leonora',
     skills: ['PHP', 'Bootstrap', 'jQuery', 'MySQL']
   },
   {
+    key: 'premiere-telekkom',
     title: <ProjectTitle href="https://pt.zambo.tech/">Premiere Telekkom API Portal</ProjectTitle>,
     description: 'An API-driven dashboard for managing load transactions and registering reloader companies via the DITO API. Features modern UI and robust API interactions.',
-    link: '#',
+    link: 'premiere-telekkom',
     skills: ['PHP', 'Bootstrap', 'MySQL', 'Ajax', 'jQuery']
   },
   {
+    key: 'portfolio-v1',
     title: (
       <ProjectTitle 
         href="https://micahmustaham.netlify.app/"
@@ -61,10 +64,11 @@ const projects = [
       </ProjectTitle>
     ),
     description: 'A personal portfolio showcasing development skills, featuring interactive 3D rendering and modern design principles.',
-    link: '#',
+    link: 'portfolio-v1',
     skills: ['React.js', 'Three.js', 'Tailwind CSS', 'Shadcn']
   },
   {
+    key: 'klimahub',
     title: (
       <ProjectTitle 
         href="https://klimahub.netlify.app/"
@@ -74,10 +78,11 @@ const projects = [
       </ProjectTitle>
     ),
     description: 'A weather app using React, Tailwind CSS and OpenWeather API. Features a modern design and easy-to-use interface.',
-    link: '#',
+    link: 'klimahub',
     skills: ['React.js', 'Tailwind CSS', 'OpenWeather API', 'Shadcn']
   },
   {
+    key: 'shortmoto',
     title: (
       <ProjectTitle 
         href="https://shortmoto.netlify.app/"
@@ -87,7 +92,7 @@ const projects = [
       </ProjectTitle>
     ),
     description: 'A URL shortener using React, Tailwind CSS, Supabase and Shadcn. Features a modern design and simple user interface.',
-    link: '#',
+    link: 'shortmoto',
     skills: ['React.js', 'Tailwind CSS', 'Supabase', 'Shadcn']
   }
 ];

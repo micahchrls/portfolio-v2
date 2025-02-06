@@ -99,27 +99,58 @@ export function Chatbot() {
   const [input, setInput] = useState("");
   const { messages, isLoading, error, sendMessage } = useChat();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = useCallback(() => {
-    if (scrollAreaRef.current) {
-      const scrollArea = scrollAreaRef.current;
-      scrollArea.scrollTo({
-        top: scrollArea.scrollHeight,
-        behavior: "smooth",
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
+    if (lastMessageRef.current && shouldAutoScroll) {
+      lastMessageRef.current.scrollIntoView({
+        behavior,
+        block: "end",
       });
     }
+  }, [shouldAutoScroll]);
+
+  // Handle scroll events to determine if user has manually scrolled up
+  const handleScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
+    const target = event.target as HTMLDivElement;
+    const isScrolledToBottom = 
+      Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < 50;
+    setShouldAutoScroll(isScrolledToBottom);
   }, []);
 
+  // Scroll to bottom on new messages or loading state change
   useEffect(() => {
-    if (messages.length > 0 || isLoading) {
+    if (messages.length > 0) {
+      // Force scroll for bot messages
+      const isLatestMessageFromBot = messages[messages.length - 1]?.role === 'assistant';
+      if (isLatestMessageFromBot) {
+        setShouldAutoScroll(true);
+        scrollToBottom();
+      } else if (shouldAutoScroll) {
+        scrollToBottom();
+      }
+    } else if (isLoading) {
+      setShouldAutoScroll(true);
       scrollToBottom();
     }
-  }, [messages, isLoading, scrollToBottom]);
+  }, [messages, isLoading, scrollToBottom, shouldAutoScroll]);
+
+  // Initial scroll and window resize handler
+  useEffect(() => {
+    if (isOpen) {
+      scrollToBottom("auto");
+      const handleResize = () => scrollToBottom("auto");
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [isOpen, scrollToBottom]);
 
   const handleSendMessage = useCallback(async () => {
     if (!input.trim() || isLoading) return;
     
     try {
+      setShouldAutoScroll(true); // Reset auto-scroll when sending new message
       await sendMessage(input.trim());
       setInput("");
     } catch (error) {
@@ -161,23 +192,32 @@ export function Chatbot() {
               exit="exit"
               layout
             >
-              <Card className="w-[380px] sm:w-[380px] w-full h-[85vh] sm:h-auto max-h-[600px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 fixed bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto">
+              <Card className="w-[380px] h-[600px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 fixed bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto overflow-hidden">
                 <ChatHeader onClose={() => setIsOpen(false)} />
-                <CardContent className="p-3 sm:p-6">
+                <CardContent className="p-0">
                   <ScrollArea 
                     ref={scrollAreaRef}
-                    className="h-[calc(100%-80px)] pr-4 mb-4"
+                    className="h-[calc(600px-64px-80px)] chat-messages-container px-4"
+                    onScroll={handleScroll}
                   >
-                    <div className="space-y-4 min-h-full">
-                      <AnimatePresence initial={false}>
+                    <div className="py-4 space-y-4">
+                      <AnimatePresence initial={false} mode="popLayout">
                         {messages.map((message, index) => (
-                          <ChatMessage
+                          <div
                             key={message.id}
-                            message={message}
-                            isLastMessage={index === messages.length - 1}
-                          />
+                            ref={index === messages.length - 1 ? lastMessageRef : null}
+                          >
+                            <ChatMessage
+                              message={message}
+                              isLastMessage={index === messages.length - 1}
+                            />
+                          </div>
                         ))}
-                        {isLoading && <TypingIndicator />}
+                        {isLoading && (
+                          <div ref={lastMessageRef}>
+                            <TypingIndicator />
+                          </div>
+                        )}
                       </AnimatePresence>
                       {error && (
                         <motion.div
@@ -190,13 +230,15 @@ export function Chatbot() {
                       )}
                     </div>
                   </ScrollArea>
-                  <ChatInput
-                    value={input}
-                    onChange={setInput}
-                    onSend={handleSendMessage}
-                    onKeyDown={handleKeyPress}
-                    isLoading={isLoading}
-                  />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-sm border-t">
+                    <ChatInput
+                      value={input}
+                      onChange={setInput}
+                      onSend={handleSendMessage}
+                      onKeyDown={handleKeyPress}
+                      isLoading={isLoading}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
