@@ -46,12 +46,16 @@ export default function Profile() {
         </p>
         <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
           <motion.a
-            whileHover={{ y: -2 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            whileHover={{ y: -2, scale: 1.02 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 300, 
+              damping: 20,
+              mass: 0.8
+            }}
             target="_blank"
-            className="inline-flex h-8 items-center rounded-lg bg-zinc-800 dark:bg-zinc-700 px-3 text-xs font-medium 
-                     text-white transition-colors duration-300 hover:bg-zinc-700 dark:hover:bg-zinc-600 gap-2"
             href="https://calendly.com/micahchrls/consultation"
+            className="inline-flex h-7 md:h-8 items-center rounded-lg bg-foreground px-2.5 md:px-4 text-[10px] md:text-xs font-medium text-background transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 gap-1 md:gap-1.5 whitespace-nowrap"
           >
             <svg
               className="w-4 h-4"
@@ -67,11 +71,17 @@ export default function Profile() {
               />
             </svg>
             <span>Let's Talk</span>
-            <svg
+            <motion.svg
               className="w-3.5 h-3.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              animate={{ x: [0, 2, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
             >
               <path
                 strokeLinecap="round"
@@ -79,7 +89,7 @@ export default function Profile() {
                 strokeWidth="1.5"
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
-            </svg>
+            </motion.svg>
           </motion.a>
           <motion.a
             whileHover={{ y: -2 }}

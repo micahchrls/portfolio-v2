@@ -1,6 +1,7 @@
 import { experiences } from '@/data/experiences';
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Experience() {
   const container = {
@@ -48,12 +49,27 @@ export default function Experience() {
 
       <motion.div 
         variants={item}
-        className="lg:group/list p-6"
+        className="lg:group/list px-6"
       >
         <HoverEffect 
           items={experienceItems}
           className="gap-4"
         />
+        
+        <motion.div 
+          variants={item}
+          className="mt-12 flex justify-start"
+        >
+          <a 
+            href="/resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            <span>View Full Résumé</span>
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </motion.div>
       </motion.div>
     </motion.section>
   );

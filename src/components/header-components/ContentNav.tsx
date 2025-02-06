@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { User2, Briefcase, FolderKanban, Star } from "lucide-react";
 
 export default function ContentNav() {
   const [activeSection, setActiveSection] = useState<string>("");
@@ -7,7 +8,7 @@ export default function ContentNav() {
     document.documentElement.style.scrollBehavior = "smooth";
 
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects"];
+      const sections = ["about", "experience", "projects", "recommendations"];
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       
@@ -49,66 +50,55 @@ export default function ContentNav() {
     };
   }, []);
 
+  const navItems = [
+    {
+      id: "about",
+      label: "About",
+      icon: User2
+    },
+    {
+      id: "experience",
+      label: "Experience",
+      icon: Briefcase
+    },
+    {
+      id: "projects",
+      label: "Projects",
+      icon: FolderKanban
+    },
+    {
+      id: "recommendations",
+      label: "Recommendations",
+      icon: Star
+    }
+  ];
+
   return (
     <nav className="nav hidden lg:block" aria-label="In-page jump links">
       <ul className="mt-16 w-max">
-        <li>
-          <a 
-            className={`group flex items-center py-3 transition-all duration-300 ease-in-out ${
-              activeSection === "about" ? "active scale-105" : ""
-            }`} 
-            href="#about"
-          >
-            <span className={`nav-indicator mr-4 transition-all duration-300 ease-in-out group-hover:w-16 group-hover:bg-zinc-800 dark:group-hover:bg-white group-focus-visible:w-16 group-focus-visible:bg-zinc-800 dark:group-focus-visible:bg-white motion-reduce:transition-none ${
-              activeSection === "about" 
-                ? "w-16 h-px bg-zinc-800 dark:bg-white shadow-glow" 
-                : "w-8 h-px bg-zinc-400 dark:bg-gray-600"
-            }`}></span>
-            <span className={`nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 ease-in-out group-hover:text-zinc-800 dark:group-hover:text-white group-focus-visible:text-zinc-800 dark:group-focus-visible:text-white group-hover:translate-x-2 ${
-              activeSection === "about" ? "text-zinc-800 dark:text-white translate-x-2" : "text-zinc-500 dark:text-gray-500"
-            }`}>
-              About
-            </span>
-          </a>
-        </li>
-        <li>
-          <a 
-            className={`group flex items-center py-3 transition-all duration-300 ease-in-out ${
-              activeSection === "experience" ? "active scale-105" : ""
-            }`} 
-            href="#experience"
-          >
-            <span className={`nav-indicator mr-4 transition-all duration-300 ease-in-out group-hover:w-16 group-hover:bg-zinc-800 dark:group-hover:bg-white group-focus-visible:w-16 group-focus-visible:bg-zinc-800 dark:group-focus-visible:bg-white motion-reduce:transition-none ${
-              activeSection === "experience" 
-                ? "w-16 h-px bg-zinc-800 dark:bg-white shadow-glow" 
-                : "w-8 h-px bg-zinc-400 dark:bg-gray-600"
-            }`}></span>
-            <span className={`nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 ease-in-out group-hover:text-zinc-800 dark:group-hover:text-white group-focus-visible:text-zinc-800 dark:group-focus-visible:text-white group-hover:translate-x-2 ${
-              activeSection === "experience" ? "text-zinc-800 dark:text-white translate-x-2" : "text-zinc-500 dark:text-gray-500"
-            }`}>
-              Experience
-            </span>
-          </a>
-        </li>
-        <li>
-          <a 
-            className={`group flex items-center py-3 transition-all duration-300 ease-in-out ${
-              activeSection === "projects" ? "active scale-105" : ""
-            }`} 
-            href="#projects"
-          >
-            <span className={`nav-indicator mr-4 transition-all duration-300 ease-in-out group-hover:w-16 group-hover:bg-zinc-800 dark:group-hover:bg-white group-focus-visible:w-16 group-focus-visible:bg-zinc-800 dark:group-focus-visible:bg-white motion-reduce:transition-none ${
-              activeSection === "projects" 
-                ? "w-16 h-px bg-zinc-800 dark:bg-white shadow-glow" 
-                : "w-8 h-px bg-zinc-400 dark:bg-gray-600"
-            }`}></span>
-            <span className={`nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 ease-in-out group-hover:text-zinc-800 dark:group-hover:text-white group-focus-visible:text-zinc-800 dark:group-focus-visible:text-white group-hover:translate-x-2 ${
-              activeSection === "projects" ? "text-zinc-800 dark:text-white translate-x-2" : "text-zinc-500 dark:text-gray-500"
-            }`}>
-              Projects
-            </span>
-          </a>
-        </li>
+        {navItems.map((item) => (
+          <li key={item.id}>
+            <a 
+              className={`group flex items-center py-3 transition-all duration-300 ease-in-out ${
+                activeSection === item.id ? "active scale-105" : ""
+              }`} 
+              href={`#${item.id}`}
+            >
+              <span className={`mr-4 transition-all duration-300 ease-in-out ${
+                activeSection === item.id 
+                  ? "text-zinc-800 dark:text-white" 
+                  : "text-zinc-400 dark:text-gray-600 group-hover:text-zinc-800 dark:group-hover:text-white"
+              }`}>
+                <item.icon className="h-4 w-4" />
+              </span>
+              <span className={`nav-text text-xs font-bold uppercase tracking-widest transition-all duration-300 ease-in-out group-hover:text-zinc-800 dark:group-hover:text-white group-focus-visible:text-zinc-800 dark:group-focus-visible:text-white group-hover:translate-x-2 ${
+                activeSection === item.id ? "text-zinc-800 dark:text-white translate-x-2" : "text-zinc-500 dark:text-gray-500"
+              }`}>
+                {item.label}
+              </span>
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
   );
