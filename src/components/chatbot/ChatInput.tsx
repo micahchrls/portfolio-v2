@@ -57,14 +57,14 @@ export function ChatInput({
   isLoading,
 }: ChatInputProps) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 px-0.5">
       <Input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={onKeyDown}
         placeholder="Type your message..."
         disabled={isLoading}
-        className="focus-visible:ring-1 bg-background/50 backdrop-blur-sm border-zinc-200/50 dark:border-zinc-800/50"
+        className="focus-visible:ring-1 bg-background/50 backdrop-blur-sm border-zinc-200/50 dark:border-zinc-800/50 h-10 sm:h-11 text-sm sm:text-base"
       />
       <motion.div
         variants={buttonVariants}
@@ -76,7 +76,7 @@ export function ChatInput({
           onClick={onSend}
           disabled={isLoading}
           size="icon"
-          className="relative shrink-0 bg-primary/90 hover:bg-primary transition-all duration-200"
+          className="relative shrink-0 bg-primary/90 hover:bg-primary transition-all duration-200 h-10 w-10 sm:h-11 sm:w-11"
         >
           <AnimatePresence mode="wait">
             {isLoading ? (

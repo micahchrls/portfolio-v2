@@ -151,7 +151,7 @@ export function Chatbot() {
           />
         )}
       </AnimatePresence>
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
         <AnimatePresence mode="wait">
           {isOpen ? (
             <motion.div
@@ -161,12 +161,12 @@ export function Chatbot() {
               exit="exit"
               layout
             >
-              <Card className="w-[380px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80">
+              <Card className="w-[380px] sm:w-[380px] w-full h-[85vh] sm:h-auto max-h-[600px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 fixed bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto">
                 <ChatHeader onClose={() => setIsOpen(false)} />
-                <CardContent>
+                <CardContent className="p-3 sm:p-6">
                   <ScrollArea 
                     ref={scrollAreaRef}
-                    className="h-[400px] pr-4 mb-4"
+                    className="h-[calc(100%-80px)] pr-4 mb-4"
                   >
                     <div className="space-y-4 min-h-full">
                       <AnimatePresence initial={false}>
@@ -221,10 +221,11 @@ export function Chatbot() {
                 <Button
                   onClick={() => setIsOpen(true)}
                   variant="secondary"
-                  className="rounded-full px-6 h-14 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 font-medium"
+                  className="rounded-full px-4 sm:px-6 h-12 sm:h-14 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 font-medium"
                 >
-                  <MessageCircle className="h-6 w-6 mr-2" />
-                  Chat with Micah!
+                  <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6 mr-2" />
+                  <span className="hidden sm:inline">Chat with Micah!</span>
+                  <span className="sm:hidden">Chat</span>
                 </Button>
               </motion.div>
             </motion.div>
