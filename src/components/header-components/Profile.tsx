@@ -46,15 +46,10 @@ export default function Profile() {
         </p>
         <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-2">
           <motion.a
-            whileHover={{ y: -2, scale: 1.02 }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 300, 
-              damping: 20,
-              mass: 0.8
-            }}
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
             target="_blank"
-            href="https://calendly.com/micahchrls/consultation"
+            href="https://calendly.com/micahmustaham/consultation"
             className="inline-flex h-7 md:h-8 items-center rounded-lg bg-foreground px-2.5 md:px-4 text-[10px] md:text-xs font-medium text-background transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 gap-1 md:gap-1.5 whitespace-nowrap"
           >
             <svg
@@ -91,13 +86,14 @@ export default function Profile() {
               />
             </motion.svg>
           </motion.a>
+          
           <motion.a
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="inline-flex h-8 items-center rounded-lg border border-zinc-200 dark:border-zinc-700 
                      bg-white dark:bg-zinc-800 px-3 text-xs font-medium text-zinc-700 dark:text-zinc-300 
                      transition-colors duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-700/70 gap-2"
-            href="mailto:micahchrls@gmail.com"
+            href="mailto:micahmustaham@gmail.com"
           >
             <svg
               className="w-4 h-4"

@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="relative mb-16 flex flex-col items-start gap-4 pb-16 text-sm text-slate-500/80 sm:pb-0">
+    <footer className=" mb-16 flex flex-col items-start gap-4 pb-16 text-sm text-slate-500/80 sm:pb-0">
       <div className="flex max-w-2xl flex-col gap-4">
         <p className="leading-relaxed">
           Designed and coded with passion by yours truly. Built with{' '}
@@ -70,7 +70,7 @@ const Footer = () => {
         </p>
       </div>
       <div className="mt-2 flex w-full items-center justify-between border-t border-slate-600/10 pt-6 dark:border-slate-700/50">
-        <p className="font-medium"> 2025 Micah Mustaham</p>
+        <p className="font-medium">© 2025 Micah Mustaham</p>
         <p className="text-sm text-slate-500">All rights reserved.</p>
       </div>
     </footer>
