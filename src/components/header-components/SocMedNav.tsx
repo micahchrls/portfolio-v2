@@ -8,7 +8,7 @@ export default function SocMedNav() {
         <li className="mr-5 shrink-0 text-xs">
           <a
             className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
-            href="https://github.com/bchiang7"
+            href="https://github.com/micahchrls"
             target="_blank"
             rel="noreferrer noopener"
             aria-label="GitHub (opens in a new tab)"
@@ -29,7 +29,7 @@ export default function SocMedNav() {
         <li className="mr-5 shrink-0 text-xs">
           <a
             className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
-            href="https://www.linkedin.com/in/bchiang7/"
+            href="https://www.linkedin.com/in/micah-mustaham/"
             target="_blank"
             rel="noreferrer noopener"
             aria-label="LinkedIn (opens in a new tab)"
@@ -51,7 +51,7 @@ export default function SocMedNav() {
         <li className="mr-5 shrink-0 text-xs">
           <a
             className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
-            href="https://instagram.com/bchiang7"
+            href="https://instagram.com/_micahchrls"
             target="_blank"
             rel="noreferrer noopener"
             aria-label="Instagram (opens in a new tab)"

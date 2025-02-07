@@ -151,7 +151,7 @@ export const AnimatedTestimonials = memo(({
                     </div>
 
                     {/* Content Section */}
-                    <div className="flex flex-col justify-between py-2">
+                    <div className="flex flex-col justify-between py-2 mt-8">
                       <div>
                         <IconQuote 
                           className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500/30 dark:text-blue-400/30 mb-3 sm:mb-4" 

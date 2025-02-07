@@ -18,4 +18,10 @@ export const testimonials: Testimonial[] = [
     designation: "Web Developer at Emergence Systems and Solutions",
     src: "/umbong.jpg",
   },
+  {
+    quote: "He has a burning passion for creating, developing, and innovating ideas, making him an invaluable member of any team.",
+    name: "Gio Dimaculangan",
+    designation: "Assistant for School Systems at Ateneo de Zamboanga University",
+    src: "/gio.jpg",
+  },
 ];

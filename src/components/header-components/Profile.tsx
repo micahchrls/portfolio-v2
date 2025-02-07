@@ -49,7 +49,7 @@ export default function Profile() {
             whileHover={{ y: -2 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             target="_blank"
-            href="https://calendly.com/micahmustaham/consultation"
+            href="https://calendly.com/micahmustaham"
             className="inline-flex h-7 md:h-8 items-center rounded-lg bg-foreground px-2.5 md:px-4 text-[10px] md:text-xs font-medium text-background transition-all duration-200 hover:bg-foreground/90 hover:-translate-y-0.5 gap-1 md:gap-1.5 whitespace-nowrap"
           >
             <svg
