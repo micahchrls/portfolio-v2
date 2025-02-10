@@ -167,7 +167,7 @@ export default function Projects() {
           Projects
         </motion.h2>
       </motion.div>
-      <div>
+      <div className="px-6" >
         <HoverEffect items={projects} className="gap-4" />
       </div>
     </motion.section>
