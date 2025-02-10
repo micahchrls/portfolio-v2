@@ -89,16 +89,18 @@ export const AnimatedTestimonials = memo(({
   const [isHovered, setIsHovered] = useState(false);
 
   const paginate = useCallback((newDirection: number) => {
-    const newPage = (page + newDirection + testimonials.length) % testimonials.length;
-    setPage([newPage, newDirection]);
+    setPage([
+      (page + newDirection + testimonials.length) % testimonials.length,
+      newDirection
+    ]);
   }, [page, testimonials.length]);
 
   useEffect(() => {
-    if (autoplay && !isHovered) {
+    if (!isHovered) {
       const timer = setInterval(() => paginate(1), 5000);
       return () => clearInterval(timer);
     }
-  }, [autoplay, isHovered, paginate]);
+  }, [isHovered, paginate]);
 
   return (
     <LazyMotion features={domAnimation}>

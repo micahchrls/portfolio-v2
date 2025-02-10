@@ -59,25 +59,6 @@ const buttonVariants = {
   }
 };
 
-const labelVariants = {
-  initial: { opacity: 0, x: -20 },
-  hover: { 
-    opacity: 1, 
-    x: 0,
-    transition: {
-      duration: 0.2,
-      ease: "easeOut"
-    }
-  },
-  exit: {
-    opacity: 0,
-    x: -20,
-    transition: {
-      duration: 0.2
-    }
-  }
-};
-
 const overlayVariants = {
   hidden: { opacity: 0 },
   visible: { 

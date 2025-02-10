@@ -10,7 +10,7 @@ export interface Experience {
   export const experiences: Experience[] = [
     {
       company: "Zamboanga City Medical Center",
-      role: "Computer Programmer I",
+      role: "Software Developer | Backend",
       duration: "2024 - Present",
       description:
         "Developing backend APIs for hospital systems using Laravel and FastAPI. Integrated PNPKI for secure digital signatures and built reporting modules to optimize data management. Collaborating with cross-functional teams to enhance hospital workflows.",
