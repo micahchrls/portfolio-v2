@@ -22,7 +22,7 @@ export default function Recommendations() {
 
       <div className="flex flex-col items-center justify-center">
         <div className="w-full mx-auto">
-          <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+          <AnimatedTestimonials testimonials={testimonials} />
         </div>
       </div>
     </motion.section>

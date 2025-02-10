@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
-import { ExternalLink, Github, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -20,15 +20,17 @@ const item = {
   show: { opacity: 1, y: 0 },
 };
 
+interface ProjectTitle {
+  children: React.ReactNode;
+  href?: string;
+  github?: string;
+}
+
 const ProjectTitle = ({
   children,
   href,
   github,
-}: {
-  children: React.ReactNode;
-  href?: string;
-  github?: string;
-}) => (
+}: ProjectTitle) => (
   <div className="inline-flex items-center gap-2 justify-between w-full h-full">
     <span>{children}</span>
     <div className="flex gap-2">
@@ -60,16 +62,19 @@ const ProjectTitle = ({
 
 interface Project {
   key: string;
-  title: JSX.Element;
+  title: string;
+  titleComponent: JSX.Element;
   description: string;
   link: string;
-  skills: string[];
+  duration?: string;
+  skills?: string[];
 }
 
 const projects: Project[] = [
   {
     key: "leonora",
-    title: (
+    title: "Leonora",
+    titleComponent: (
       <ProjectTitle href="https://leonorafinance.com/">Leonora</ProjectTitle>
     ),
     description:
@@ -79,7 +84,8 @@ const projects: Project[] = [
   },
   {
     key: "premiere-telekkom",
-    title: (
+    title: "Premiere Telekkom API Portal",
+    titleComponent: (
       <ProjectTitle href="https://pt.zambo.tech/">
         Premiere Telekkom API Portal
       </ProjectTitle>
@@ -91,7 +97,8 @@ const projects: Project[] = [
   },
   {
     key: "portfolio-v1",
-    title: (
+    title: "Portfolio V1",
+    titleComponent: (
       <ProjectTitle
         href="https://micahmustaham.netlify.app/"
         github="https://github.com/micahchrls"
@@ -106,7 +113,8 @@ const projects: Project[] = [
   },
   {
     key: "klimahub",
-    title: (
+    title: "Klimahub",
+    titleComponent: (
       <ProjectTitle
         href="https://klimahub.netlify.app/"
         github="https://github.com/micahchrls/klimahub"
@@ -121,7 +129,8 @@ const projects: Project[] = [
   },
   {
     key: "shortmoto",
-    title: (
+    title: "Shortmoto",
+    titleComponent: (
       <ProjectTitle
         href="https://shortmoto.netlify.app/"
         github="https://github.com/micahchrls/shortmoto"
@@ -158,22 +167,9 @@ export default function Projects() {
           Projects
         </motion.h2>
       </motion.div>
-
-      <motion.div variants={item} className="lg:group/list px-6">
+      <div>
         <HoverEffect items={projects} className="gap-4" />
-
-        <motion.div variants={item} className="mt-12 flex justify-start">
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            <span>View All Projects</span>
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </motion.div>
-      </motion.div>
+      </div>
     </motion.section>
   );
 }

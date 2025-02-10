@@ -36,8 +36,7 @@ const slideVariants = {
 };
 
 // Memoized navigation button component
-const NavigationButton = memo(({ direction, onClick, icon: Icon }: { 
-  direction: 'left' | 'right';
+const NavigationButton = memo(({ onClick, icon: Icon }: { 
   onClick: () => void;
   icon: typeof IconChevronLeft | typeof IconChevronRight;
 }) => (
@@ -78,22 +77,16 @@ const PaginationDot = memo(({ isActive, onClick }: {
 
 PaginationDot.displayName = 'PaginationDot';
 
-export const AnimatedTestimonials = memo(({
-  testimonials,
-  autoplay = false,
-}: {
-  testimonials: Testimonial[];
-  autoplay?: boolean;
-}) => {
+export const AnimatedTestimonials = memo(({ testimonials }: { testimonials: Testimonial[] }) => {
   const [[page, direction], setPage] = useState([0, 0]);
   const [isHovered, setIsHovered] = useState(false);
 
   const paginate = useCallback((newDirection: number) => {
-    setPage([
-      (page + newDirection + testimonials.length) % testimonials.length,
+    setPage(([currentPage]) => [
+      (currentPage + newDirection + testimonials.length) % testimonials.length,
       newDirection
     ]);
-  }, [page, testimonials.length]);
+  }, [testimonials.length]);
 
   useEffect(() => {
     if (!isHovered) {
@@ -195,12 +188,10 @@ export const AnimatedTestimonials = memo(({
             {/* Navigation Buttons */}
             <div className="absolute -left-2 -right-2 sm:-left-4 md:-left-12 sm:right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
               <NavigationButton
-                direction="left"
                 onClick={() => paginate(-1)}
                 icon={IconChevronLeft}
               />
               <NavigationButton
-                direction="right"
                 onClick={() => paginate(1)}
                 icon={IconChevronRight}
               />
