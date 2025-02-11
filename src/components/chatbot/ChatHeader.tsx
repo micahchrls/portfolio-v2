@@ -1,14 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { CardHeader, CardTitle } from "@/components/ui/card";
-import { X } from "lucide-react";
+import { X, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ChatHeaderProps {
   onClose: () => void;
+  onClear: () => void;
   isOnline?: boolean;
 }
 
-export function ChatHeader({ onClose, isOnline = true }: ChatHeaderProps) {
+export function ChatHeader({ onClose, onClear, isOnline = true }: ChatHeaderProps) {
   return (
     <div className="sticky top-0 z-10 backdrop-blur-xl rounded-t-xl">
       <CardHeader 
@@ -31,7 +38,7 @@ export function ChatHeader({ onClose, isOnline = true }: ChatHeaderProps) {
           </div>
           <div className="flex flex-col">
             <CardTitle className="text-sm sm:text-base font-semibold leading-none mb-1">
-              Chat with Micah
+              Chat with Micah 🧑‍💻
             </CardTitle>
             <div className="flex items-center gap-1.5 text-xs">
               <span className="flex items-center gap-1.5">
@@ -49,20 +56,39 @@ export function ChatHeader({ onClose, isOnline = true }: ChatHeaderProps) {
               </span>
               <span className="text-muted-foreground">•</span>
               <span className="text-muted-foreground">
-                Powered by Google Gemini
+                Typically replies in a few seconds
               </span>
             </div>
           </div>
         </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onClose}
-          className="hover:bg-destructive/10 hover:text-destructive transition-colors"
-          aria-label="Close chat"
-        >
-          <X className="h-4 w-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-7 w-7"
+                  onClick={onClear}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Clear chat</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="h-7 w-7 hover:bg-destructive/10 hover:text-destructive transition-colors"
+            onClick={onClose}
+            aria-label="Close chat"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
       </CardHeader>
     </div>
   );

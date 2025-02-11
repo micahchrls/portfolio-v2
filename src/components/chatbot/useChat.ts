@@ -141,10 +141,33 @@ export const useChat = () => {
     [model, chat]
   );
 
+  const clearMessages = useCallback(async () => {
+    setState(prev => ({ ...prev, messages: [WELCOME_MESSAGE], isLoading: false, error: null }));
+    if (model) {
+      try {
+        const newChat = model.startChat({
+          safetySettings,
+          generationConfig: {
+            temperature: 0.8,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 1024,
+          },
+        });
+        await newChat.sendMessage(PERSONAL_CONTEXT);
+        setChat(newChat);
+      } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "Failed to reset chat";
+        setState(prev => ({ ...prev, error: errorMessage }));
+      }
+    }
+  }, [model]);
+
   return {
     messages: state.messages,
     isLoading: state.isLoading,
     error: state.error,
     sendMessage,
+    clearMessages,
   };
 };

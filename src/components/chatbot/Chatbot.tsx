@@ -78,7 +78,7 @@ const overlayVariants = {
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const { messages, isLoading, error, sendMessage } = useChat();
+  const { messages, isLoading, error, sendMessage, clearMessages } = useChat();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -174,7 +174,10 @@ export function Chatbot() {
               layout
             >
               <Card className="w-[380px] h-[600px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 fixed bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto overflow-hidden">
-                <ChatHeader onClose={() => setIsOpen(false)} />
+                <ChatHeader 
+                  onClose={() => setIsOpen(false)} 
+                  onClear={clearMessages}
+                />
                 <CardContent className="p-0">
                   <ScrollArea 
                     ref={scrollAreaRef}
@@ -254,6 +257,7 @@ export function Chatbot() {
             </motion.div>
           )}
         </AnimatePresence>
+       
       </div>
     </>
   );

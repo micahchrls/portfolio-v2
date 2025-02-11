@@ -57,53 +57,60 @@ export function ChatInput({
   isLoading,
 }: ChatInputProps) {
   return (
-    <div className="flex gap-2 px-0.5">
-      <Input
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={onKeyDown}
-        placeholder="Type your message..."
-        disabled={isLoading}
-        className="focus-visible:ring-1 bg-background/50 backdrop-blur-sm border-zinc-200/50 dark:border-zinc-800/50 h-10 sm:h-11 text-sm sm:text-base"
-      />
-      <motion.div
-        variants={buttonVariants}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
-      >
-        <Button
-          onClick={onSend}
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <Input
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder="Type your message..."
           disabled={isLoading}
-          size="icon"
-          className="relative shrink-0 bg-primary/90 hover:bg-primary transition-all duration-200 h-10 w-10 sm:h-11 sm:w-11"
+          className="focus-visible:ring-1 bg-background/50 backdrop-blur-sm border-zinc-200/50 dark:border-zinc-800/50 h-10 sm:h-11 text-sm sm:text-base"
+        />
+        <motion.div
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
         >
-          <AnimatePresence mode="wait">
-            {isLoading ? (
-              <motion.div
-                key="loader"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.15 }}
-                className="flex items-center justify-center"
-              >
-                <Loader2 className="h-4 w-4 animate-spin" />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="send"
-                variants={iconVariants}
-                initial="initial"
-                whileHover="hover"
-                className="flex items-center justify-center"
-              >
-                <Send className="h-4 w-4" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </Button>
-      </motion.div>
+          <Button
+            onClick={onSend}
+            disabled={isLoading}
+            size="icon"
+            className="relative shrink-0 bg-primary/90 hover:bg-primary transition-all duration-200 h-10 w-10 sm:h-11 sm:w-11"
+          >
+            <AnimatePresence mode="wait">
+              {isLoading ? (
+                <motion.div
+                  key="loader"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex items-center justify-center"
+                >
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="send"
+                  variants={iconVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  className="flex items-center justify-center"
+                >
+                  <Send className="h-4 w-4" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Button>
+        </motion.div>
+      </div>
+      <div className="flex items-center justify-center text-center">
+        <p className="text-[10px] text-muted-foreground/80 bg-muted/50 px-2 py-1 rounded-full">
+          This Chatbot may produce inaccurate information 😁
+        </p>
+      </div>
     </div>
   );
 }

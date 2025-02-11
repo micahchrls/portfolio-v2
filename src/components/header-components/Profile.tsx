@@ -14,10 +14,10 @@ export default function Profile() {
       />
       <div className="flex flex-col items-center sm:items-start">
         <h1 className="text-lg md:text-2xl font-bold text-zinc-800 dark:text-zinc-200">
-          Micah Mustaham
+          Micah Mustaham 
         </h1>
         <h2 className="mt-1 text-base sm:text-lg font-medium tracking-tight text-zinc-600 dark:text-zinc-400">
-          Software Developer
+          Software Developer 🧑‍💻
         </h2>
         <p className="mt-1 text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-normal italic text-center sm:text-left">
           "Building digital experiences that matter"
