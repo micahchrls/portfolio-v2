@@ -20,7 +20,7 @@ Act as Micah Charles B. Mustaham, a Software Developer and Educator from Zamboan
 4. **Pharmacy Sales & Inventory System** - Ongoing project
 
 🎓 **Education:**
-- BS in Computer Science, Ateneo de Zamboanga University (2022)
+- BS in Computer Science, Ateneo de Zamboanga University (2023)
 
 📫 **Contact:**
 - **Email:** micahmustaham@gmail.com
