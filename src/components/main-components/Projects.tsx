@@ -72,15 +72,41 @@ interface Project {
 
 const projects: Project[] = [
   {
-    key: "leonora",
-    title: "Leonora",
+    key: "centrosys",
+    title: "CentroSys: Pharmacy Management",
     titleComponent: (
-      <ProjectTitle href="https://leonorafinance.com/">Leonora</ProjectTitle>
+      <ProjectTitle href="https://centrosys.online/">
+        CentroSys: Pharmacy Management
+      </ProjectTitle>
     ),
     description:
-      "A comprehensive personal finance platform featuring a loan management system. Built with focus on efficient data handling and optimal user experience.",
+      "Full-stack pharmacy sales and inventory system that digitized manual processes, reducing inventory discrepancies by 85%. Built with React.js (TypeScript) frontend and Laravel RESTful API backend with optimized MySQL database design.",
+    link: "centrosys",
+    skills: ["React.js", "TypeScript", "Laravel", "MySQL", "ShadCN", "RESTful API"],
+  },
+  {
+    key: "titansys",
+    title: "TitanSys: Inventory Management",
+    titleComponent: (
+      <ProjectTitle href="https://titansys.laravel.cloud/">
+        TitanSys: Inventory Management
+      </ProjectTitle>
+    ),
+    description:
+      "Comprehensive inventory system for a car parts business enabling real-time tracking across 1,000+ SKUs. Built with Laravel 12, Inertia.js and React for a seamless SPA experience, reducing inventory management time by 70%.",
+    link: "titansys",
+    skills: ["Laravel", "Inertia.js", "React", "MySQL", "Laravel Cloud"],
+  },
+  {
+    key: "leonora",
+    title: "Leonora: Finance Platform",
+    titleComponent: (
+      <ProjectTitle href="https://leonorafinance.com/">Leonora: Finance Platform</ProjectTitle>
+    ),
+    description:
+      "Personal finance platform with comprehensive loan management capabilities that streamlined financial operations by 65%. Built with PHP, Bootstrap, jQuery, and MySQL for efficient data handling and optimal user experience.",
     link: "leonora",
-    skills: ["PHP", "Bootstrap", "jQuery", "MySQL"],
+    skills: ["PHP", "Bootstrap", "jQuery", "MySQL", "Finance API"],
   },
   {
     key: "premiere-telekkom",
@@ -91,57 +117,25 @@ const projects: Project[] = [
       </ProjectTitle>
     ),
     description:
-      "An API-driven dashboard for managing load transactions and registering reloader companies via the DITO API. Features modern UI and robust API interactions.",
+      "API-driven dashboard for telecom load transactions processing 500+ daily requests. Integrated with DITO API for seamless reloading operations, featuring modern UI and real-time monitoring of transaction status.",
     link: "premiere-telekkom",
-    skills: ["PHP", "Bootstrap", "MySQL", "Ajax", "jQuery"],
+    skills: ["PHP", "Bootstrap", "MySQL", "Ajax", "jQuery", "REST API"],
   },
   {
-    key: "portfolio-v1",
-    title: "Portfolio V1",
+    key: "portfolio-v2",
+    title: "Portfolio Website",
     titleComponent: (
       <ProjectTitle
-        href="https://micahmustaham.netlify.app/"
-        github="https://github.com/micahchrls"
+        href="https://micahchrls.vercel.app"
+        github="https://github.com/micahchrls/portfolio-v2"
       >
-        Portfolio V1
+        Portfolio Website
       </ProjectTitle>
     ),
     description:
-      "A personal portfolio showcasing development skills, featuring interactive 3D rendering and modern design principles.",
-    link: "portfolio-v1",
-    skills: ["React.js", "Three.js", "Tailwind CSS", "Shadcn"],
-  },
-  {
-    key: "klimahub",
-    title: "Klimahub",
-    titleComponent: (
-      <ProjectTitle
-        href="https://klimahub.netlify.app/"
-        github="https://github.com/micahchrls/klimahub"
-      >
-        Klimahub
-      </ProjectTitle>
-    ),
-    description:
-      "A weather app using React, Tailwind CSS and OpenWeather API. Features a modern design and easy-to-use interface.",
-    link: "klimahub",
-    skills: ["React.js", "Tailwind CSS", "OpenWeather API", "Shadcn"],
-  },
-  {
-    key: "shortmoto",
-    title: "Shortmoto",
-    titleComponent: (
-      <ProjectTitle
-        href="https://shortmoto.netlify.app/"
-        github="https://github.com/micahchrls/shortmoto"
-      >
-        Shortmoto
-      </ProjectTitle>
-    ),
-    description:
-      "A URL shortener using React, Tailwind CSS, Supabase and Shadcn. Features a modern design and simple user interface.",
-    link: "shortmoto",
-    skills: ["React.js", "Tailwind CSS", "Supabase", "Shadcn"],
+      "Modern personal portfolio built with React.js and Tailwind CSS, enhanced with ShadCN components for a sleek modular UI. Features an AI-powered chatbot using Google Gemini AI for interactive user engagement.",
+    link: "portfolio-v2",
+    skills: ["React.js", "Tailwind CSS", "Framer Motion", "ShadCN", "Gemini AI"],
   },
 ];
 
