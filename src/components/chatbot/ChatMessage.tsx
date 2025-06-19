@@ -1,90 +1,46 @@
+import React from "react";
 import { motion } from "framer-motion";
-import { Message } from "./types";
 import { cn } from "@/lib/utils";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { forwardRef } from "react";
+import ReactMarkdown from 'react-markdown';
+import { Message } from "@/components/chatbot/types";
+import { UserAvatar } from "@/components/chatbot/Avatar";
+
+interface ChatBubbleProps {
+  children: React.ReactNode;
+  isAssistant: boolean;
+}
 
 interface ChatMessageProps {
   message: Message;
   isLastMessage?: boolean;
 }
 
-const messageVariants = {
-  hidden: { 
-    opacity: 0,
-    y: 10,
-    scale: 0.95,
-  },
-  visible: { 
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 500,
-      damping: 30,
-    }
-  }
-};
-
-const bubbleVariants = {
-  initial: { scale: 0.9, opacity: 0 },
-  animate: { 
-    scale: 1, 
-    opacity: 1,
-    transition: {
-      type: "spring",
-      stiffness: 500,
-      damping: 25,
-    }
-  }
-};
-
-interface ChatBubbleProps {
-  children: React.ReactNode;
-  isAssistant: boolean;
-  className?: string;
-}
-
-const ChatBubble = forwardRef<HTMLDivElement, ChatBubbleProps>(
-  ({ children, isAssistant, className }, ref) => (
-    <motion.div
-      ref={ref}
-      variants={bubbleVariants}
-      initial="initial"
-      animate="animate"
+function ChatBubble({ children, isAssistant }: ChatBubbleProps) {
+  return (
+    <div
       className={cn(
-        "rounded-2xl px-3.5 py-2 shadow-sm backdrop-blur-sm transition-colors duration-200 mt-2",
+        "px-4 py-3 rounded-xl relative",
         isAssistant
-          ? "bg-muted/50 hover:bg-muted/70 rounded-bl-none"
-          : "bg-primary/90 hover:bg-primary text-primary-foreground rounded-br-none",
-        className
+          ? "bg-gray-100 dark:bg-neutral-800 text-black dark:text-white"
+          : "bg-black text-white dark:bg-white dark:text-black"
       )}
     >
       {children}
-    </motion.div>
-  )
-);
-ChatBubble.displayName = "ChatBubble";
-
-const UserAvatar = () => (
-  <div className="relative">
-    <Avatar className="h-6 w-6 ring-2 ring-background">
-      <AvatarImage src="/avatar.jpeg" alt="Micah" />
-      <AvatarFallback>ML</AvatarFallback>
-    </Avatar>
-    <div className="absolute -bottom-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-background" />
-  </div>
-);
+    </div>
+  );
+}
 
 export function ChatMessage({ message, isLastMessage = false }: ChatMessageProps) {
   const isAssistant = message.role === "assistant";
 
   return (
     <motion.div
-      variants={messageVariants}
-      initial="hidden"
-      animate="visible"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.35,
+        ease: [0.4, 0, 0.2, 1],
+      }}
       className={cn(
         "flex w-full",
         isAssistant ? "justify-start" : "justify-end",
@@ -93,7 +49,7 @@ export function ChatMessage({ message, isLastMessage = false }: ChatMessageProps
     >
       <div 
         className={cn(
-          "flex items-end gap-2 max-w-[80%] group",
+          "flex items-end gap-2 max-w-[80%] md:max-w-[75%] group",
           !isAssistant && "flex-row-reverse"
         )}
       >
@@ -104,20 +60,59 @@ export function ChatMessage({ message, isLastMessage = false }: ChatMessageProps
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
-              className="text-[13px] leading-[1.6] tracking-[-0.01em] font-normal break-words"
+              className="text-[13px] md:text-[14px] leading-[1.6] tracking-[-0.01em] font-normal break-words markdown-content"
             >
-              {message.content}
-            </motion.div>
-            <motion.div
-              className="absolute -bottom-3.5 left-0 text-[10px] text-muted-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity select-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
-            >
-              {new Date(message.timestamp).toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+              {isAssistant ? (
+                <ReactMarkdown 
+                  components={{
+                    ul: ({node, ...props}) => (
+                      <ul className="pl-5 list-disc space-y-1 my-1" {...props} />
+                    ),
+                    ol: ({node, ...props}) => (
+                      <ol className="pl-5 list-decimal space-y-1 my-1" {...props} />
+                    ),
+                    li: ({node, ...props}) => (
+                      <li className="my-0.5" {...props} />
+                    ),
+                    p: ({node, ...props}) => (
+                      <p className="my-1.5" {...props} />
+                    ),
+                    h1: ({node, ...props}) => (
+                      <h1 className="text-lg font-semibold my-2" {...props} />
+                    ),
+                    h2: ({node, ...props}) => (
+                      <h2 className="text-md font-semibold my-2" {...props} />
+                    ),
+                    h3: ({node, ...props}) => (
+                      <h3 className="font-semibold my-1.5" {...props} />
+                    ),
+                    a: ({node, href, ...props}) => (
+                      <a 
+                        href={href} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-500 dark:text-blue-400 underline hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+                        {...props} 
+                      />
+                    ),
+                    strong: ({node, ...props}) => (
+                      <strong className="font-semibold" {...props} />
+                    ),
+                    code: ({node, inline, ...props}) => (
+                      inline ? 
+                        <code className="bg-gray-200 dark:bg-neutral-700 px-1 py-0.5 rounded text-xs font-mono" {...props} /> :
+                        <code className="block bg-gray-200 dark:bg-neutral-700 p-2 rounded text-xs font-mono my-2 overflow-x-auto" {...props} />
+                    ),
+                    pre: ({node, ...props}) => (
+                      <pre className="bg-gray-200 dark:bg-neutral-700 p-2 rounded my-2 overflow-x-auto" {...props} />
+                    ),
+                  }}
+                >
+                  {message.content}
+                </ReactMarkdown>
+              ) : (
+                message.content
+              )}
             </motion.div>
           </div>
         </ChatBubble>

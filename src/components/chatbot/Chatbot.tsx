@@ -2,13 +2,15 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, ArrowDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "./useChat";
 import { ChatMessage } from "./ChatMessage";
 import { ChatHeader } from "./ChatHeader";
 import { ChatInput } from "./ChatInput";
 import { TypingIndicator } from "./TypingIndicator";
+import { SuggestedQuestion } from "@/components/chatbot/SuggestedQuestion";
+import { UserAvatar } from "@/components/chatbot/Avatar";
 
 const chatVariants = {
   hidden: {
@@ -82,10 +84,37 @@ export function Chatbot() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const lastMessageRef = useRef<HTMLDivElement>(null);
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<MutationObserver | null>(null);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [isWelcomeVisible, setIsWelcomeVisible] = useState(true);
+
+  // After 5 seconds, hide the welcome animation
+  useEffect(() => {
+    if (isOpen && isWelcomeVisible) {
+      const timer = setTimeout(() => {
+        setIsWelcomeVisible(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, isWelcomeVisible]);
+  
+  // Handle welcome screen exit with animation
+  const handleWelcomeExit = () => {
+    setIsWelcomeVisible(false);
+  };
+
+  // Reset welcome state when chat is closed
+  useEffect(() => {
+    if (!isOpen) {
+      setIsWelcomeVisible(true);
+    }
+  }, [isOpen]);
 
   const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
-    if (lastMessageRef.current && shouldAutoScroll) {
-      lastMessageRef.current.scrollIntoView({
+    if (messagesEndRef.current && shouldAutoScroll) {
+      messagesEndRef.current.scrollIntoView({
         behavior,
         block: "end",
       });
@@ -97,25 +126,52 @@ export function Chatbot() {
     const target = event.target as HTMLDivElement;
     const isScrolledToBottom = 
       Math.abs(target.scrollHeight - target.scrollTop - target.clientHeight) < 50;
+    
     setShouldAutoScroll(isScrolledToBottom);
+    setShowScrollButton(!isScrolledToBottom);
   }, []);
 
   // Scroll to bottom on new messages or loading state change
   useEffect(() => {
-    if (messages.length > 0) {
-      // Force scroll for bot messages
-      const isLatestMessageFromBot = messages[messages.length - 1]?.role === 'assistant';
-      if (isLatestMessageFromBot) {
-        setShouldAutoScroll(true);
-        scrollToBottom();
-      } else if (shouldAutoScroll) {
-        scrollToBottom();
-      }
-    } else if (isLoading) {
-      setShouldAutoScroll(true);
+    if (messages.length > 0 || isLoading) {
       scrollToBottom();
     }
-  }, [messages, isLoading, scrollToBottom, shouldAutoScroll]);
+  }, [messages, isLoading, scrollToBottom]);
+
+  // Use MutationObserver to detect content changes in the chat area
+  useEffect(() => {
+    if (isOpen && scrollAreaRef.current) {
+      const scrollElement = scrollAreaRef.current.querySelector('[data-radix-scroll-area-viewport]');
+      
+      if (scrollElement) {
+        // Disconnect previous observer if it exists
+        if (observerRef.current) {
+          observerRef.current.disconnect();
+        }
+
+        // Create new observer
+        observerRef.current = new MutationObserver((mutations) => {
+          if (shouldAutoScroll) {
+            scrollToBottom();
+          }
+        });
+
+        // Start observing
+        observerRef.current.observe(scrollElement, {
+          childList: true,
+          subtree: true,
+          attributes: false,
+          characterData: true
+        });
+      }
+
+      return () => {
+        if (observerRef.current) {
+          observerRef.current.disconnect();
+        }
+      };
+    }
+  }, [isOpen, shouldAutoScroll, scrollToBottom]);
 
   // Initial scroll and window resize handler
   useEffect(() => {
@@ -132,12 +188,20 @@ export function Chatbot() {
     
     try {
       setShouldAutoScroll(true); // Reset auto-scroll when sending new message
+      setShowScrollButton(false);
       await sendMessage(input.trim());
       setInput("");
+      scrollToBottom();
     } catch (error) {
       console.error("Failed to send message:", error);
     }
-  }, [input, isLoading, sendMessage]);
+  }, [input, isLoading, sendMessage, scrollToBottom]);
+
+  const handleScrollToBottom = () => {
+    setShouldAutoScroll(true);
+    setShowScrollButton(false);
+    scrollToBottom();
+  };
 
   const handleKeyPress = useCallback(
     (e: React.KeyboardEvent) => {
@@ -174,8 +238,8 @@ export function Chatbot() {
               layout
             >
               <Card className="w-[380px] h-[600px] shadow-2xl border border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-xl bg-white/80 dark:bg-zinc-900/80 fixed bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto overflow-hidden">
-                <ChatHeader 
-                  onClose={() => setIsOpen(false)} 
+                <ChatHeader
+                  onClose={() => setIsOpen(false)}
                   onClear={clearMessages}
                 />
                 <CardContent className="p-0">
@@ -184,7 +248,41 @@ export function Chatbot() {
                     className="h-[calc(600px-64px-80px)] chat-messages-container px-4"
                     onScroll={handleScroll}
                   >
-                    <div className="py-4 space-y-4">
+                    <AnimatePresence>
+                      {isWelcomeVisible && messages.length <= 1 && (
+                        <motion.div 
+                          className="flex flex-col items-center justify-center py-8 px-4 text-center"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          key="welcome-screen"
+                        >
+                          <div className="mb-4">
+                            <UserAvatar />
+                          </div>
+                          
+                          <h3 className="text-lg font-medium mb-2">
+                            Hi, I'm Micah's AI Assistant
+                          </h3>
+                          
+                          <p className="text-sm text-muted-foreground mb-4">
+                            Ask me anything about Micah's skills, experience, or projects!
+                          </p>
+                          
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            className="rounded-full"
+                            onClick={handleWelcomeExit}
+                          >
+                            Start chatting
+                          </Button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    
+                    <div className="py-4 mb-4 space-y-4">
                       <AnimatePresence initial={false} mode="popLayout">
                         {messages.map((message, index) => (
                           <div
@@ -212,8 +310,67 @@ export function Chatbot() {
                           <div className="text-sm text-destructive">{error}</div>
                         </motion.div>
                       )}
+                      <div ref={messagesEndRef} style={{ height: 1, visibility: 'hidden', opacity: 0 }} />
                     </div>
+                    
+                    {/* Suggested Questions - Show only when no messages or just welcome message */}
+                    {messages.length <= 1 && (
+                      <motion.div 
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5 }}
+                        className="px-4 pb-4"
+                      >
+                        <div className="text-sm text-muted-foreground mb-2 mt-2">Here are some things you can ask me:</div>
+                        <div className="flex flex-wrap gap-2">
+                          <SuggestedQuestion 
+                            onClick={() => {
+                              setInput("Tell me about your work experience");
+                              setTimeout(() => handleSendMessage(), 0);
+                            }}
+                          >
+                            Work experience
+                          </SuggestedQuestion>
+                          <SuggestedQuestion 
+                            onClick={() => {
+                              setInput("What are your technical skills?");
+                              setTimeout(() => handleSendMessage(), 0);
+                            }}
+                          >
+                            Technical skills
+                          </SuggestedQuestion>
+                          <SuggestedQuestion 
+                            onClick={() => {
+                              setInput("Tell me about your projects");
+                              setTimeout(() => handleSendMessage(), 0);
+                            }}
+                          >
+                            Projects
+                          </SuggestedQuestion>
+                          <SuggestedQuestion 
+                            onClick={() => {
+                              setInput("How can I contact you?");
+                              setTimeout(() => handleSendMessage(), 0);
+                            }}
+                          >
+                            Contact info
+                          </SuggestedQuestion>
+                        </div>
+                      </motion.div>
+                    )}
                   </ScrollArea>
+                  
+                  {showScrollButton && (
+                    <Button
+                      size="icon"
+                      variant="secondary"
+                      className="absolute bottom-[88px] right-4 z-10 rounded-full h-8 w-8 p-0 shadow-md"
+                      onClick={handleScrollToBottom}
+                    >
+                      <ArrowDown className="h-4 w-4" />
+                    </Button>
+                  )}
+                  
                   <div className="absolute bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-sm border-t">
                     <ChatInput
                       value={input}
