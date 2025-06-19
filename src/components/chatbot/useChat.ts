@@ -55,8 +55,13 @@ const addConversationalElements = (text: string, query: string): string => {
   const isGreeting = /^(hi|hello|hey|greetings|howdy)/i.test(query);
   const isThankYou = /thank|thanks/i.test(query);
   
+  // Check if the text already contains common conversational phrases
+  const hasClosingPhrase = /(anything else|other questions|feel free|let me know|more details|happy to help)/i.test(text);
+  const hasGreeting = /(hi|hello|hey there|great to chat|thanks for reaching out)/i.test(text.split('.')[0]);
+  const hasQuestionResponse = /(great question|happy to explain|definitely|sure|of course)/i.test(text.split('.')[0]);
+  
   // Personalized conversation starters based on query type
-  if (isGreeting) {
+  if (isGreeting && !hasGreeting) {
     const greetings = [
       "Hey there! ",
       "Hi! Great to chat with you. ",
@@ -65,7 +70,7 @@ const addConversationalElements = (text: string, query: string): string => {
     return greetings[Math.floor(Math.random() * greetings.length)] + text;
   }
   
-  if (isThankYou) {
+  if (isThankYou && !hasClosingPhrase) {
     const endings = [
       "\n\nIs there anything else you'd like to know?",
       "\n\nHappy to help! Let me know if you have other questions.",
@@ -74,7 +79,7 @@ const addConversationalElements = (text: string, query: string): string => {
     return text + endings[Math.floor(Math.random() * endings.length)];
   }
   
-  if (isQuestion) {
+  if (isQuestion && !hasQuestionResponse) {
     const starters = [
       "Great question! ",
       "I'd be happy to explain. ",
@@ -286,8 +291,12 @@ ${exchangeCount > 3 ? "Since we've been talking for a while, you can be more cas
         // Check for specific domain inquiries and enhance responses
         if (cleanedText.toLowerCase().includes('project') || cleanedText.toLowerCase().includes('work')) {
           // Add subtle call-to-action for portfolio related questions
-          if (!cleanedText.includes('portfolio') && !cleanedText.includes('micahchrls.vercel.app')) {
-            cleanedText += '\n\nFor more details, you can visit my linked in profile at [Micah Mustaham](https://www.linkedin.com/in/micah-mustaham/)';
+          // Only add if no profile links are already present and no closing phrases exist
+          const hasProfileLink = /(linkedin|github|micah\s+mustaham|portfolio|micahchrls\.vercel\.app)/i.test(cleanedText);
+          const hasClosingStatement = /(for more details|you can visit|check out|find more|learn more)/i.test(cleanedText);
+          
+          if (!hasProfileLink && !hasClosingStatement) {
+            cleanedText += '\n\nFor more details, you can visit my LinkedIn profile at [Micah Mustaham](https://www.linkedin.com/in/micah-mustaham/)';
           }
         }
 

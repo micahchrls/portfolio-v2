@@ -87,30 +87,17 @@ export function Chatbot() {
   const [showScrollButton, setShowScrollButton] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<MutationObserver | null>(null);
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [isWelcomeVisible, setIsWelcomeVisible] = useState(true);
+  const [welcomeVisible, setWelcomeVisible] = useState(true);
 
-  // After 5 seconds, hide the welcome animation
+  // Auto-hide welcome after 5 seconds
   useEffect(() => {
-    if (isOpen && isWelcomeVisible) {
+    if (isOpen && welcomeVisible) {
       const timer = setTimeout(() => {
-        setIsWelcomeVisible(false);
+        setWelcomeVisible(false);
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [isOpen, isWelcomeVisible]);
-  
-  // Handle welcome screen exit with animation
-  const handleWelcomeExit = () => {
-    setIsWelcomeVisible(false);
-  };
-
-  // Reset welcome state when chat is closed
-  useEffect(() => {
-    if (!isOpen) {
-      setIsWelcomeVisible(true);
-    }
-  }, [isOpen]);
+  }, [isOpen, welcomeVisible]);
 
   const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
     if (messagesEndRef.current && shouldAutoScroll) {
@@ -150,9 +137,9 @@ export function Chatbot() {
         }
 
         // Create new observer
-        observerRef.current = new MutationObserver((mutations) => {
+        observerRef.current = new MutationObserver((_mutations) => {
           if (shouldAutoScroll) {
-            scrollToBottom();
+            scrollToBottom("smooth");
           }
         });
 
@@ -248,14 +235,17 @@ export function Chatbot() {
                     className="h-[calc(600px-64px-80px)] chat-messages-container px-4"
                     onScroll={handleScroll}
                   >
-                    <AnimatePresence>
-                      {isWelcomeVisible && messages.length <= 1 && (
+                    <AnimatePresence mode="sync">
+                      {messages.length <= 1 && welcomeVisible && (
                         <motion.div 
                           className="flex flex-col items-center justify-center py-8 px-4 text-center"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
+                          transition={{ 
+                            duration: 0.75,
+                            ease: "easeInOut"
+                          }}
                           key="welcome-screen"
                         >
                           <div className="mb-4">
@@ -274,7 +264,7 @@ export function Chatbot() {
                             size="sm" 
                             variant="outline"
                             className="rounded-full"
-                            onClick={handleWelcomeExit}
+                            onClick={() => setWelcomeVisible(false)}
                           >
                             Start chatting
                           </Button>

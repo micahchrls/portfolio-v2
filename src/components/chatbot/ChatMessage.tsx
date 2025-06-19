@@ -98,11 +98,12 @@ export function ChatMessage({ message, isLastMessage = false }: ChatMessageProps
                     strong: ({node, ...props}) => (
                       <strong className="font-semibold" {...props} />
                     ),
-                    code: ({node, inline, ...props}) => (
-                      inline ? 
+                    code: ({node, className, ...props}: any) => {
+                      const isInline = (props as any).inline;
+                      return isInline ? 
                         <code className="bg-gray-200 dark:bg-neutral-700 px-1 py-0.5 rounded text-xs font-mono" {...props} /> :
                         <code className="block bg-gray-200 dark:bg-neutral-700 p-2 rounded text-xs font-mono my-2 overflow-x-auto" {...props} />
-                    ),
+                    },
                     pre: ({node, ...props}) => (
                       <pre className="bg-gray-200 dark:bg-neutral-700 p-2 rounded my-2 overflow-x-auto" {...props} />
                     ),
