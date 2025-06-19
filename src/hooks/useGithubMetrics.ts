@@ -23,7 +23,7 @@ interface GitHubMetrics {
 
 // Your GitHub personal access token with 'repo' scope
 // Use environment variable for security
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN || '';
+const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || '';
 
 // Helper function for delay in async retry logic
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
