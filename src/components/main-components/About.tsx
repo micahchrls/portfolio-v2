@@ -9,7 +9,7 @@ import {
   Server,
   LineChart,
 } from "lucide-react";
-import useGitHubMetrics from "@/hooks/useGitHubMetrics";
+import useGitHubMetrics from "@/hooks/useGithubMetrics";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import { NumberTicker } from "@/components/magicui/number-ticker";
 
@@ -60,20 +60,21 @@ const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </p>
 );
 
-const SkillTag: React.FC<{ skill: string; index: number }> = ({
-  skill,
-  index,
-}) => (
-  <motion.span
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.3, delay: index * 0.1 }}
-    className="inline-block bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 rounded-full px-3 py-1 text-sm mr-2 mb-2 
-              hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 transition-colors duration-200"
-  >
-    {skill}
-  </motion.span>
-);
+// Commented out as it's unused but might be needed later
+// const SkillTag: React.FC<{ skill: string; index: number }> = ({
+// skill,
+//   index,
+// }) => (
+//   <motion.span
+//    initial={{ opacity: 0, y: 20 }}
+//    animate={{ opacity: 1, y: 0 }}
+//    transition={{ duration: 0.3, delay: index * 0.1 }}
+//     className="inline-block bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 rounded-full px-3 py-1 text-sm mr-2 mb-2 
+//               hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 transition-colors duration-200"
+//  >
+//     {skill}
+//   </motion.span>
+// );
 
 const MetricCard: React.FC<{ metric: Metric; index: number }> = ({
   metric,
@@ -173,12 +174,13 @@ const LanguageBar: React.FC<{
 };
 
 // Create a component for language category display
+// Remove unused icon parameter
 const LanguageCategory: React.FC<{
   title: string;
-  icon: React.ReactNode;
+  // icon removed as it's unused
   languages: Record<string, number>;
   loading: boolean;
-}> = ({ title, icon, languages, loading }) => {
+}> = ({ title, languages, loading }) => {
   const languageEntries = Object.entries(languages);
 
   if (loading) {
@@ -422,7 +424,6 @@ const About = () => {
                     ) : (
                       <LanguageCategory
                         title="Frontend"
-                        icon={<Monitor className="h-4 w-4" />}
                         languages={languagesByCategory.frontend}
                         loading={loading}
                       />
@@ -451,7 +452,6 @@ const About = () => {
                     ) : (
                       <LanguageCategory
                         title="Backend"
-                        icon={<Server className="h-4 w-4" />}
                         languages={languagesByCategory.backend}
                         loading={loading}
                       />

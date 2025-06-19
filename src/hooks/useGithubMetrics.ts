@@ -348,7 +348,7 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
           const batchLanguages = await Promise.all(languagePromises);
           
           // Process language data from this batch
-          batchLanguages.forEach(({ name, languages }) => {
+          batchLanguages.forEach(({ languages }) => { // Removed unused 'name' parameter
             for (const [language, bytes] of Object.entries(languages)) {
               const byteCount = bytes as number;
               

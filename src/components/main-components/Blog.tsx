@@ -23,7 +23,7 @@ interface BlogCardProps {
   index: number;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ post }) => { // Removed unused 'index' parameter
   return (
     <motion.div
       variants={item}
