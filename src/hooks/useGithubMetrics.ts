@@ -62,14 +62,12 @@ async function fetchWithRetry(url: string, options: RequestInit, maxRetries = 3)
     // If 409 (Conflict), this likely means the repo is empty or has special status
     // Return the response directly so callers can handle it appropriately
     if (response.status === 409) {
-      console.log(`GitHub API returned 409 (Conflict) for ${url}. Repository may be empty or unavailable.`);
       return response;
     }
     
     // If 202 (processing), wait with exponential backoff and retry
     if (response.status === 202) {
       const waitTime = Math.pow(2, retries) * 1000; // Exponential backoff: 1s, 2s, 4s, etc.
-      console.log(`GitHub API returned 202 (processing). Waiting ${waitTime}ms before retry...`);
       await delay(waitTime);
       retries++;
       continue;
@@ -189,7 +187,6 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
       // First check cache
       const now = Date.now();
       if (metricsCache[username] && (now - metricsCache[username].timestamp) < CACHE_DURATION) {
-        console.log('Using cached GitHub metrics');
         setMetrics(metricsCache[username].data);
         return;
       }
@@ -205,13 +202,10 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
         
         // Fetch ALL repositories including private ones with added fields like topics
         // Use fetchAllPages to handle pagination
-        console.log('Fetching all repositories...');
         const repos = await fetchAllPages<any>(
           `https://api.github.com/users/${username}/repos?type=all&per_page=100&sort=pushed`, 
           headers
         );
-        
-        console.log(`Found ${repos.length} repositories`);
         
         // Calculate total repos and stars
         const totalStars = repos.reduce((sum: number, repo: any) => sum + repo.stargazers_count, 0);
@@ -247,8 +241,6 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
           reposToProcess = [...priorityRepos, ...forksToInclude];
         }
         
-        console.log(`Processing ${reposToProcess.length} repositories for detailed metrics`);
-        
         // Fetch total commits across repositories (in batches)
         let totalCommits = 0;
         
@@ -259,7 +251,6 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
             try {
               // Skip known problematic repositories
               if (SKIP_REPOS.includes(repo.name)) {
-                console.log(`Skipping known problematic repository: ${repo.name}`);
                 return 0;
               }
               
@@ -269,7 +260,6 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
                 { headers }
               );
               if (!repoResponse.ok) {
-                console.log(`Repository ${repo.name} is not accessible. Skipping...`);
                 return 0;
               }
               
@@ -297,12 +287,10 @@ const useGitHubMetrics = (username: string): GitHubMetrics => {
               
               // Handle 409 Conflict - treat as repository with 0 commits
               if (commitsResponse.status === 409) {
-                console.log(`Repository ${repo.name} returned 409. Treating as 0 commits.`);
                 return 0;
               }
               
-              // For any other status code, log and return 0
-              console.log(`Repository ${repo.name} returned unexpected status: ${commitsResponse.status}`);
+              // For any other status code, return 0
               return 0;
             } catch (error) {
               console.error(`Error fetching commits for ${repo.name}:`, error);

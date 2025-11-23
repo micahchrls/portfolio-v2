@@ -36,7 +36,7 @@ export default function Profile() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.4 }}
         >
-          System Developer | Laravel, FastApi, ReactJS
+          Software Developer | Backend
         </motion.h2>
         <motion.p
           className="mt-1 text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-normal italic text-center sm:text-left"
@@ -44,7 +44,7 @@ export default function Profile() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.5 }}
         >
-          "Building digital experiences that matter"
+          "Building scalable systems that deliver business value"
         </motion.p>
         <motion.p
           className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 mt-2 flex items-center gap-1.5 justify-center sm:justify-start"

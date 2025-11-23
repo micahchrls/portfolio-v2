@@ -9,48 +9,59 @@ export interface Experience {
   
   export const experiences: Experience[] = [
     {
-      company: "Zamboanga City Medical Center",
-      role: "Backend Developer",
-      duration: "June 2024 - Present",
+      company: "Titan FX",
+      role: "Backend Software Developer",
+      duration: "Jul 2025 - Present",
       description:
-        "Architected and implemented Laravel-based APIs for hospital procurement monitoring, reducing approval time by 40%. Engineered secure PNPKI digital signature integration using Laravel and FastAPI microservices, enabling legally compliant electronic document processing for 200+ staff. Optimized reporting modules through query caching and Eloquent ORM improvements, reducing generation time by 60% for critical reports.",
-      skills: ["Laravel", "FastAPI", "MySQL", "API Development", "Database Optimization", "PNPKI Integration", "Eloquent ORM"]
+        "Develop and maintain software applications in accordance with company requirements and standards. Collaborate with cross-functional teams to define, design, and ship new features. Implement automated testing platforms and unit tests to ensure software reliability. Contribute to the design and architecture of software solutions while mentoring junior developers and communicating effectively with project managers and stakeholders.",
+      skills: ["Laravel", "API Development", "Software Architecture", "Automated Testing", "Team Collaboration", "Code Review", "Mentorship"]
+    },
+    {
+      company: "Zamboanga City Medical Center",
+      role: "Computer Programmer II",
+      duration: "Jan 2025 - Jul 2025",
+      description:
+        "Developed Laravel-based APIs for a hospital Purchase Request Monitoring System, enhancing procurement transparency and streamlining the approval process. Led the integration of PNPKI digital signatures by developing Laravel backend APIs and a FastAPI microservice for secure, scalable digital document signing. Contributed to the development of a User Management Information System and optimized the Reports module (DTR, leave reports) by implementing query caching and improving database performance using Laravel Eloquent.",
+      skills: ["Laravel", "FastAPI", "MySQL", "API Development", "PNPKI Integration", "Database Optimization", "Eloquent ORM", "Microservices"]
+    },
+    {
+      company: "Zamboanga City Medical Center",
+      role: "Computer Programmer I",
+      duration: "Jun 2024 - Dec 2024",
+      description:
+        "Part of the development team for the Annual Operation Plan system, building RESTful APIs with Laravel and optimizing database queries using Eloquent ORM. Participated in code reviews and contributed to improving system reliability and performance.",
+      skills: ["PHP", "Laravel", "MySQL", "REST API", "Eloquent ORM"]
     },
     {
       company: "Ateneo de Zamboanga University",
-      role: "College Professor",
-      duration: "August 2023 - Present",
-        /**
-         * Develop and deliver comprehensive curriculum in programming fundamentals, OOP, and core computer science subjects to 100+ undergraduate students.
-         * Mentor students through practical coding exercises and real-world projects, with 90% achieving proficiency in fundamental programming concepts.
-         * Design and implement project-based assessments that bridge theoretical concepts with industry-relevant applications.
-         */
+      role: "College Professor (Part-time)",
+      duration: "2023 - Jan 2025",
       description:
-        "Develop and deliver comprehensive curriculum in programming fundamentals, OOP, and core computer science subjects to 100+ undergraduate students. Mentor students through practical coding exercises and real-world projects, with 90% achieving proficiency in fundamental programming concepts. Design and implement project-based assessments that bridge theoretical concepts with industry-relevant applications.",
-      skills: ["Teaching", "Programming", "Mentorship", "Curriculum Development", "Project-Based Learning"]
+        "Teach foundational programming, object-oriented programming (OOP), and core computer science subjects to CS, IT and Computer Engineering students. Provide mentorship and practical coding experience through hands-on teaching of software development practices.",
+      skills: ["Teaching", "Programming", "OOP", "Mentorship", "Curriculum Development"]
     },
     {
       company: "Ateneo de Zamboanga University",
       role: "System Developer",
-      duration: "January 2023 - June 2024",
+      duration: "Jan 2023 - Jun 2024",
       description:
-        "Maintained and enhanced legacy university portal using vanilla PHP, MySQL, and Bootstrap, improving system reliability by 35%. Designed and deployed a comprehensive Procurement System that digitized manual workflows, reducing processing time by 50% and improving data accuracy. Provided technical support and training to users, facilitating smooth adoption of new systems across departments.",
-      skills: ["PHP", "MySQL", "JavaScript", "Bootstrap", "jQuery", "System Design", "Legacy System Maintenance"]
+        "Maintained a legacy university portal using vanilla PHP, MySQL, and Bootstrap, and developed the DTR Reports module with raw database queries. Designed and deployed full-stack applications, including a Procurement System for the university developed with PHP, Bootstrap, Ajax(jQuery), and MySQL, streamlining the manual procurement process. Provided technical support and training to users on newly implemented systems and facilitated smooth adoption.",
+      skills: ["PHP", "MySQL", "JavaScript", "Bootstrap", "jQuery", "Full-Stack Development", "Legacy System Maintenance"]
     },
     {
       company: "Fiverr",
       role: "Freelance Software Developer",
-      duration: "January 2023 - June 2024",
+      duration: "Apr 2020 - Nov 2021",
       description:
-        "Specialized in C++ projects, debugging and optimizing performance-critical applications. Developed a comprehensive web ordering system for a pizza company using Django and Bootstrap, improving customer order management efficiency by 70%. Created custom portfolio websites using modern frontend technologies, delivering responsive solutions to a diverse global client base with 100% satisfaction rate.",
-      skills: ["C++", "Django", "Laravel", "Bootstrap", "HTML", "CSS", "JavaScript", "Responsive Design"]
+        "Specialized in C++ projects, debugging and optimizing web applications built with Django and Laravel. Developed a web application ordering system for a pizza company using Django and Bootstrap, improving customer order management. Developed clean, responsive portfolio websites using HTML, CSS, and JavaScript, delivering solutions to a global client base.",
+      skills: ["C++", "Django", "Laravel", "PostgreSQL", "PHP", "Bootstrap", "HTML", "CSS", "JavaScript", "Responsive Design"]
     },
     {
       company: "Symph",
-      role: "Developer Intern",
-      duration: "April 2021 - June 2021",
+      role: "Dev Intern",
+      duration: "Apr 2021 - Jun 2021",
       description:
-        "Contributed to data-centric features on React/Node applications for external clients, improving data visualization and user experience. Participated in agile development processes and sprint planning. Collaborated with senior developers through GitHub for code reviews and version control, gaining valuable industry experience in a production environment.",
-      skills: ["React", "Node.js", "JavaScript", "Git", "GitHub", "Agile Methodology"]
+        "Leveraged JavaScript technologies like React and Node.js to build and debug client product websites. Contributed to a more streamlined user experience by resolving bugs and enhancing website functionality, reducing user-reported issues. Utilized Linear platform for task management and GitHub for version control and code collaboration.",
+      skills: ["React", "Node.js", "JavaScript", "Git", "GitHub", "Agile Methodology", "Linear"]
     }
   ];

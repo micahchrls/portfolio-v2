@@ -60,21 +60,6 @@ const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </p>
 );
 
-// Commented out as it's unused but might be needed later
-// const SkillTag: React.FC<{ skill: string; index: number }> = ({
-// skill,
-//   index,
-// }) => (
-//   <motion.span
-//    initial={{ opacity: 0, y: 20 }}
-//    animate={{ opacity: 1, y: 0 }}
-//    transition={{ duration: 0.3, delay: index * 0.1 }}
-//     className="inline-block bg-zinc-100/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 rounded-full px-3 py-1 text-sm mr-2 mb-2 
-//               hover:bg-zinc-200 hover:text-zinc-900 dark:hover:bg-zinc-700 dark:hover:text-zinc-50 transition-colors duration-200"
-//  >
-//     {skill}
-//   </motion.span>
-// );
 
 const MetricCard: React.FC<{ metric: Metric; index: number }> = ({
   metric,
@@ -219,8 +204,8 @@ const LanguageCategory: React.FC<{
 
 const aboutContent: AboutContent = {
   intro:
-    "Experienced Backend Engineer with over three years of hands-on development using PHP and Laravel, with strong expertise in SQL and relational database management. Specializing in scalable APIs, database optimization, and secure architecture for healthcare and education sectors with a proven track record of successful legacy system migrations and third-party integrations.",
-  currentRole: "Currently driving innovation in healthcare systems at",
+    "I'm a backend specialist with a knack for simplifying complexity—whether that's untangling legacy code or helping new developers ramp up fast. With 4+ years of experience in Laravel and API development, I build scalable systems that streamline workflows and bring teams together through clean, reliable code. I've also bridged frontend/backend gaps with React and TypeScript, contributing across the stack when needed. Beyond the code, I'm passionate about clear communication and collaborative problem-solving—qualities that make me a steady presence in fast-moving environments.",
+  currentRole: "Currently building scalable backend systems at",
   skills: [
     "PHP",
     "Laravel",
@@ -238,9 +223,9 @@ const aboutContent: AboutContent = {
   ],
   links: {
     workplace: {
-      text: "Zamboanga City Medical Center",
-      url: "https://zcmc.doh.gov.ph/",
-      label: "Zamboanga City Medical Center",
+      text: "Titan FX",
+      url: "https://www.titanfx.com/",
+      label: "Titan FX",
     },
     github: {
       text: "GitHub",
@@ -328,7 +313,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24"
+      className="mb-12 scroll-mt-16 md:mb-16 lg:mb-20 lg:scroll-mt-24"
       aria-label="About me"
     >
       <motion.div
@@ -361,111 +346,14 @@ const About = () => {
               <Paragraph>
                 {aboutContent.currentRole}{" "}
                 <ExternalLink {...aboutContent.links.workplace} />, where I
-                architect Laravel-based APIs and integrate PNPKI digital
-                signatures. My work has reduced procurement processing time by
-                32% and improved report generation efficiency by 28% through
-                optimized database queries and caching strategies.
+                build and maintain backend systems in an agile environment.
+                I collaborate with cross-functional teams to design, develop,
+                and ship features that drive business value, while contributing
+                to software architecture decisions and implementing robust testing
+                practices.
               </Paragraph>
             </motion.div>
           </div>
-
-          <motion.div variants={item} className="py-2">
-            <div className="flex items-center gap-2 mb-4">
-              <LineChart className="h-4 w-4 text-zinc-800 dark:text-zinc-200" />
-              <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                GitHub Metrics
-              </h3>
-            </div>
-            <BoxReveal width="100%" boxColor="#71717a">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {error && (
-                  <div className="col-span-4 text-sm text-red-500">
-                    Failed to load GitHub metrics: {error}
-                  </div>
-                )}
-                {metrics.map((metric, index) => (
-                  <MetricCard
-                    key={metric.label}
-                    metric={metric}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </BoxReveal>
-            <motion.div variants={item} className="py-2">
-              <p className="text-xs text-center text-zinc-500 dark:text-zinc-400 italic">
-                <Github className="inline h-3 w-3 mr-1 mb-0.5" />
-                All GitHub metrics and language statistics are fetched directly
-                from my GitHub account data.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          <motion.div variants={item} className="pt-2">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Frontend Languages */}
-
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <Monitor className="h-4 w-4 text-zinc-800 dark:text-zinc-200" />
-                  <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                    Frontend Languages
-                  </h3>
-                </div>
-                <BoxReveal width="100%" boxColor="#71717a">
-                  <div className="bg-zinc-100/70 dark:bg-zinc-800/50 rounded-lg p-4">
-                    {loading ? (
-                      <div className="flex items-center justify-center py-6">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-zinc-500"></div>
-                        <span className="ml-2 text-sm text-zinc-500">
-                          Loading GitHub data...
-                        </span>
-                      </div>
-                    ) : (
-                      <LanguageCategory
-                        title="Frontend"
-                        languages={languagesByCategory.frontend}
-                        loading={loading}
-                      />
-                    )}
-                  </div>
-                </BoxReveal>
-              </div>
-
-              {/* Backend Languages */}
-              <BoxReveal width="100%" boxColor="#71717a">
-                <div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Server className="h-4 w-4 text-zinc-800 dark:text-zinc-200" />
-                    <h3 className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                      Backend Languages
-                    </h3>
-                  </div>
-                  <div className="bg-zinc-100/70 dark:bg-zinc-800/50 rounded-lg p-4">
-                    {loading ? (
-                      <div className="flex items-center justify-center py-6">
-                        <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-zinc-500"></div>
-                        <span className="ml-2 text-sm text-zinc-500">
-                          Loading GitHub data...
-                        </span>
-                      </div>
-                    ) : (
-                      <LanguageCategory
-                        title="Backend"
-                        languages={languagesByCategory.backend}
-                        loading={loading}
-                      />
-                    )}
-                  </div>
-                </div>
-              </BoxReveal>
-            </div>
-            <p className="text-xs text-center mt-2 text-zinc-500 dark:text-zinc-400 italic">
-              <Github className="inline h-3 w-3 mr-1 mb-0.5" />
-              All GitHub metrics and language statistics are fetched directly
-              from my GitHub account data.
-            </p>
-          </motion.div>
         </motion.div>
       </motion.div>
     </section>
