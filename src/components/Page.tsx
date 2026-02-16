@@ -1,7 +1,7 @@
 import Main from "@/components/Main"
 import Header from "@/components/Header"
 import { motion } from "framer-motion";
-import { Chatbot } from "@/components/chatbot/Chatbot";
+// import { Chatbot } from "@/components/chatbot/Chatbot";
 
 const Page = () => {
   return (
@@ -20,7 +20,7 @@ const Page = () => {
           </div>
         </div>
       </motion.div>
-      <Chatbot />
+      {/* <Chatbot /> */}
     </>
   )
 }
