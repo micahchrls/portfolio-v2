@@ -2,6 +2,7 @@ import About from "@/components/main-components/About"
 import Experience from "@/components/main-components/Experience"
 import Projects from "@/components/main-components/Projects"
 import Recommendations from "@/components/main-components/Recommendations"
+import Contact from "@/components/main-components/Contact"
 import Footer from "@/components/main-components/Footer"
 
 const Main = () => {
@@ -11,6 +12,7 @@ const Main = () => {
       <Experience />
       <Projects />
       <Recommendations />
+      <Contact />
       <Footer/>
     </main>
   )

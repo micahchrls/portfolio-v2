@@ -1,31 +1,70 @@
 import { experiences } from '@/data/experiences';
-import { HoverEffect } from "@/components/ui/card-hover-effect";
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, Briefcase } from 'lucide-react';
+import { Timeline } from '@/components/ui/timeline';
+import { MagicCard } from '@/components/magicui/magic-card';
 
 export default function Experience() {
+  const shouldReduceMotion = useReducedMotion();
+
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: shouldReduceMotion ? 0 : 0.15,
+        delayChildren: shouldReduceMotion ? 0 : 0.2,
       }
     }
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    show: { opacity: 1, y: 0, transition: { duration: shouldReduceMotion ? 0 : 0.5 } }
   };
 
-  const experienceItems = experiences.map((experience) => ({
-    title: `${experience.role} · ${experience.company}`,
-    description: experience.description,
-    link: `${experience.company.toLowerCase().replace(/\s+/g, '-')}-${experience.role.toLowerCase().replace(/\s+/g, '-')}`,
-    duration: experience.duration,
-    skills: experience.skills,
+  const timelineData = experiences.map((experience) => ({
+    title: experience.duration,
+    content: (
+      <MagicCard
+        className="rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-default"
+        gradientColor="#14532d"
+        gradientFrom="#22c55e"
+        gradientTo="#10b981"
+        gradientSize={250}
+        gradientOpacity={0.12}
+      >
+        <div className="p-6">
+          {/* Header */}
+          <div className="flex flex-col gap-2 mb-3">
+            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+              <Briefcase className="w-5 h-5 flex-shrink-0" />
+              {experience.role}
+            </h3>
+            <p className="text-base font-semibold text-zinc-600 dark:text-zinc-400">
+              {experience.company}
+            </p>
+          </div>
+
+          {/* Description */}
+          <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+            {experience.description}
+          </p>
+
+          {/* Skills */}
+          <div className="flex flex-wrap gap-2">
+            {experience.skills.map((skill) => (
+              <span
+                key={skill}
+                className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </MagicCard>
+    ),
   }));
 
   return (
@@ -47,18 +86,13 @@ export default function Experience() {
         </motion.h2>
       </motion.div>
 
-      <motion.div 
-        variants={item}
-        className="lg:group/list px-6"
-      >
-        <HoverEffect 
-          items={experienceItems}
-          className="gap-4"
-        />
+      <div className="w-full">
+        <Timeline data={timelineData} />
         
+        {/* View Resume Link */}
         <motion.div 
           variants={item}
-          className="mt-12 flex justify-start"
+          className="mt-12 flex justify-center md:justify-start md:pl-10"
         >
           <a 
             href="/resume.pdf" 
@@ -70,7 +104,7 @@ export default function Experience() {
             <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </motion.div>
-      </motion.div>
+      </div>
     </motion.section>
   );
 }

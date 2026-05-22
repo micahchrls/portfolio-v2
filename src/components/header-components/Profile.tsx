@@ -36,15 +36,24 @@ export default function Profile() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.4 }}
         >
-          System Developer | Laravel, FastApi, ReactJS
+          Backend Engineer | Laravel & APIs
         </motion.h2>
+        <motion.span
+          className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/20 dark:ring-emerald-400/20"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.45 }}
+        >
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+          Available for select freelance projects
+        </motion.span>
         <motion.p
           className="mt-1 text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-normal italic text-center sm:text-left"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.5 }}
         >
-          "Building digital experiences that matter"
+          "Shipping backend systems faster — with AI in the loop."
         </motion.p>
         <motion.p
           className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 mt-2 flex items-center gap-1.5 justify-center sm:justify-start"
@@ -79,7 +88,7 @@ export default function Profile() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
         >
-          <a target="_blank" href="https://calendly.com/micahmustaham">
+          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/micahmustaham">
             <InteractiveHoverButton>Let's Talk</InteractiveHoverButton>
           </a>
         </motion.div>

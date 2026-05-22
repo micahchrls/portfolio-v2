@@ -1,24 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { ExternalLink, Github } from "lucide-react";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
 
 interface ProjectTitle {
   children: React.ReactNode;
@@ -133,13 +117,31 @@ const projects: Project[] = [
       </ProjectTitle>
     ),
     description:
-      "Modern personal portfolio built with React.js and Tailwind CSS, enhanced with ShadCN components for a sleek modular UI. Features an AI-powered chatbot using Google Gemini AI for interactive user engagement.",
+      "Modern personal portfolio built with React.js, Tailwind CSS, and Framer Motion — designed to showcase backend and full-stack work to recruiters and prospective clients. Achieves fast load times and high Lighthouse scores through optimized assets and clean component architecture.",
     link: "portfolio-v2",
-    skills: ["React.js", "Tailwind CSS", "Framer Motion", "ShadCN", "Gemini AI"],
+    skills: ["React.js", "Tailwind CSS", "Framer Motion", "ShadCN", "TypeScript"],
   },
 ];
 
 export default function Projects() {
+  const shouldReduceMotion = useReducedMotion();
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.2,
+        delayChildren: shouldReduceMotion ? 0 : 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    show: { opacity: 1, y: 0 },
+  };
+
   return (
     <motion.section
       variants={container}

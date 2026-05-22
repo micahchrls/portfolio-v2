@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useCallback, memo } from "react";
 import { IconQuote, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { LazyMotion, domAnimation } from "framer-motion";
@@ -80,6 +80,7 @@ PaginationDot.displayName = 'PaginationDot';
 export const AnimatedTestimonials = memo(({ testimonials }: { testimonials: Testimonial[] }) => {
   const [[page, direction], setPage] = useState([0, 0]);
   const [isHovered, setIsHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const paginate = useCallback((newDirection: number) => {
     setPage(([currentPage]) => [
@@ -108,10 +109,11 @@ export const AnimatedTestimonials = memo(({ testimonials }: { testimonials: Test
               <motion.div
                 key={`testimonial-${page}`}
                 custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
+                variants={shouldReduceMotion ? undefined : slideVariants}
+                initial={shouldReduceMotion ? { opacity: 0 } : "enter"}
+                animate={shouldReduceMotion ? { opacity: 1 } : "center"}
+                exit={shouldReduceMotion ? { opacity: 0 } : "exit"}
+                transition={shouldReduceMotion ? { duration: 0.15 } : undefined}
                 className="absolute inset-0"
               >
                 <div className="h-full w-full overflow-hidden">
@@ -128,6 +130,9 @@ export const AnimatedTestimonials = memo(({ testimonials }: { testimonials: Test
                           <img
                             src={testimonials[page].src}
                             alt={testimonials[page].name}
+                            loading="lazy"
+                            width="192"
+                            height="192"
                             sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 192px"
                             className="object-cover object-center transition-all duration-500 ease-out will-change-transform"
                             style={{

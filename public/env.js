@@ -1,3 +1,0 @@
-window.__env = {
-  NEXT_PUBLIC_GEMINI_API_KEY: '%NEXT_PUBLIC_GEMINI_API_KEY%'
-};
