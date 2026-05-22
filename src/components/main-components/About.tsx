@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { Github, Globe } from "lucide-react";
 
 interface ExternalLink {
   text: string;
@@ -42,8 +43,8 @@ const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 const aboutContent: AboutContent = {
   intro:
-    "I'm a backend specialist with a knack for simplifying complexity—whether that's untangling legacy code or helping new developers ramp up fast. With 4+ years of experience in Laravel and API development, I build scalable systems that streamline workflows and bring teams together through clean, reliable code. I've also bridged frontend/backend gaps with React and TypeScript, contributing across the stack when needed. Beyond the code, I'm passionate about clear communication and collaborative problem-solving—qualities that make me a steady presence in fast-moving environments.",
-  currentRole: "Currently building scalable backend systems at",
+    "Backend engineer specializing in Laravel and API development — and one who actively uses AI agents to build faster and better. I integrate tools like Claude Code into my development workflow for code generation, architecture review, and rapid iteration, letting me move at a pace that would normally require a larger team without sacrificing quality. Across fintech, healthcare, and government projects, I've built and modernized systems that replace manual processes with transparent, auditable backends.",
+  currentRole: "Currently building backend infrastructure and migrating legacy systems at",
   skills: [
     "PHP",
     "Laravel",
@@ -54,10 +55,11 @@ const aboutContent: AboutContent = {
     "MySQL",
     "PostgreSQL",
     "API Development",
+    "AI Agents",
+    "LLM Integration",
     "Database Optimization",
     "Eloquent ORM",
     "Git",
-    "C++",
   ],
   links: {
     workplace: {
@@ -78,31 +80,22 @@ const aboutContent: AboutContent = {
   },
 };
 
-/**
- * Renders the About section of the portfolio.
- *
- * @remarks
- * This component uses Framer Motion to animate the content, and Tailwind CSS to style it.
- * It renders a header with the title "About", followed by a container with a max-width of 2xl.
- * The container has a sticky top navigation bar with the title "About" and a link to the resume.
- * The main content of the section is divided into three sections: technical stack, impact metrics, and a call to action.
- * The technical stack section renders a list of skills as tags, and the impact metrics section renders a grid of metrics.
- * The call to action section renders a link to the resume and a link to the portfolio.
- */
 const About = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: shouldReduceMotion ? 0 : 0.2,
       },
     },
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 20 },
+    show: { opacity: 1, y: 0, transition: { duration: shouldReduceMotion ? 0 : 0.5 } },
   };
 
   return (
@@ -140,15 +133,48 @@ const About = () => {
             <motion.div variants={item}>
               <Paragraph>
                 {aboutContent.currentRole}{" "}
-                <ExternalLink {...aboutContent.links.workplace} />, where I
-                build and maintain backend systems in an agile environment.
-                I collaborate with cross-functional teams to design, develop,
-                and ship features that drive business value, while contributing
-                to software architecture decisions and implementing robust testing
-                practices.
+                <ExternalLink {...aboutContent.links.workplace} />, a global
+                forex brokerage, where I build new features and lead legacy
+                system migrations using an AI-augmented development process.
+                I bring the same approach to freelance projects — if you need
+                a backend system built or modernized, I can help.
               </Paragraph>
             </motion.div>
           </div>
+
+          <motion.div variants={item} className="flex flex-wrap gap-2">
+            {aboutContent.skills.map((skill) => (
+              <span
+                key={skill}
+                className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md"
+              >
+                {skill}
+              </span>
+            ))}
+          </motion.div>
+
+          <motion.div variants={item} className="mt-4 flex flex-wrap gap-2">
+            <a
+              href={aboutContent.links.github.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="GitHub (opens in a new tab)"
+              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+            >
+              <Github className="w-3.5 h-3.5" />
+              GitHub
+            </a>
+            <a
+              href={aboutContent.links.portfolio.url}
+              target="_blank"
+              rel="noreferrer noopener"
+              aria-label="Portfolio (opens in a new tab)"
+              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              Portfolio
+            </a>
+          </motion.div>
         </motion.div>
       </motion.div>
     </section>

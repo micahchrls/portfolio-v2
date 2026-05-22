@@ -5,14 +5,12 @@ import { cn } from "@/lib/utils";
 interface InteractiveHoverButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ElementType;
-  initialColor?: string;
-  hoverColor?: string;
 }
 
 export const InteractiveHoverButton = React.forwardRef<
   HTMLButtonElement,
   InteractiveHoverButtonProps
->(({ children, className, icon: Icon = MessageCircle, initialColor, hoverColor, ...props }, ref) => {
+>(({ children, className, icon: Icon = MessageCircle, ...props }, ref) => {
   return (
     <button
       ref={ref}
