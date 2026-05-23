@@ -1,5 +1,6 @@
 import Main from "@/components/Main"
 import Header from "@/components/Header"
+import MobileNav from "@/components/header-components/MobileNav"
 import { motion } from "framer-motion";
 
 const Page = () => {
@@ -17,6 +18,7 @@ const Page = () => {
           <Main />
         </div>
       </div>
+      <MobileNav />
     </motion.div>
   )
 }
