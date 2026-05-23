@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Mail, CalendarDays, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
 const container = {
   hidden: { opacity: 0 },
@@ -55,12 +56,19 @@ export default function Contact() {
       </motion.div>
 
       <motion.div variants={item} className="mb-8">
-        <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">
+        <h2 className="font-display text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">
           Get in touch
         </h2>
-        <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-md">
-          Have a project in mind or want to collaborate? Send me a message and I'll get back to you within a day or two.
+        <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-md mb-4">
+          Have a project in mind or want to collaborate? Book a call or send me a message — I get back within a day or two.
         </p>
+        <a
+          href="https://calendly.com/micahmustaham"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <InteractiveHoverButton>Let's Talk →</InteractiveHoverButton>
+        </a>
       </motion.div>
 
       <motion.div variants={item} className="max-w-md">

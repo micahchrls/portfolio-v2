@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User2, Briefcase, FolderKanban, Star, Mail } from "lucide-react";
+import { Briefcase, Award, FolderKanban, Star, Mail, User2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function ContentNav() {
@@ -10,11 +10,10 @@ export default function ContentNav() {
     document.documentElement.style.scrollBehavior = "smooth";
 
     const handleScroll = () => {
-      const sections = ["about", "experience", "projects", "recommendations", "contact"];
+      const sections = ["about", "projects", "experience", "recommendations", "certifications", "contact"];
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
-      
-      // Check if we're at the very top of the page
+
       if (scrollPosition === 0) {
         setActiveSection("about");
         return;
@@ -59,19 +58,24 @@ export default function ContentNav() {
       icon: User2
     },
     {
-      id: "experience",
-      label: "Experience",
-      icon: Briefcase
-    },
-    {
       id: "projects",
       label: "Projects",
       icon: FolderKanban
     },
     {
+      id: "experience",
+      label: "Experience",
+      icon: Briefcase
+    },
+    {
       id: "recommendations",
       label: "Recommendations",
       icon: Star
+    },
+    {
+      id: "certifications",
+      label: "Certifications",
+      icon: Award
     },
     {
       id: "contact",

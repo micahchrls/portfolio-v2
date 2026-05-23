@@ -1,97 +1,91 @@
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 import { motion } from "framer-motion";
+import { Download, MapPin, ArrowRight } from "lucide-react";
 
 export default function Profile() {
+  const handleSeeWork = () => {
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
-      <motion.img
-        alt="Micah Mustaham"
-        width="180"
-        height="180"
-        decoding="async"
-        src="/profile.jpeg"
-        data-nimg="1"
-        className="rounded-lg w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 object-cover shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-      />
-      <motion.div
-        className="flex flex-col items-center sm:items-start"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        <motion.h1
-          className="text-lg md:text-2xl font-bold text-zinc-800 dark:text-zinc-200"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-        >
-          Micah Mustaham
-        </motion.h1>
-        <motion.h2
-          className="mt-1 text-sm sm:text-lg font-semibold tracking-tight text-zinc-600 dark:text-zinc-400"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-        >
-          Backend Engineer | Laravel & APIs
-        </motion.h2>
-        <motion.span
-          className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/20 dark:ring-emerald-400/20"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.45 }}
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-          Available for select freelance projects
-        </motion.span>
-        <motion.p
-          className="mt-1 text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-normal italic text-center sm:text-left"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-        >
-          "Shipping backend systems faster — with AI in the loop."
-        </motion.p>
-        <motion.p
-          className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 mt-2 flex items-center gap-1.5 justify-center sm:justify-start"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.6 }}
-        >
-          <svg
-            className="w-3.5 h-3.5 flex-shrink-0"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          <span>Zamboanga City, Philippines</span>
-        </motion.p>
+    <div className="flex flex-col gap-5">
+      {/* Avatar + name side by side */}
+      <div className="flex items-start gap-4">
+        <motion.img
+          alt="Micah Mustaham"
+          width="180"
+          height="180"
+          decoding="async"
+          src="/profile.webp"
+          className="rounded-lg w-36 h-36 object-cover flex-shrink-0 shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+        />
+
+        {/* Name + title block */}
         <motion.div
-          className="mt-2 flex flex-wrap justify-center sm:justify-start gap-2"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.7 }}
+          className="flex flex-col gap-1.5 min-w-0"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
         >
-          <a target="_blank" rel="noopener noreferrer" href="https://calendly.com/micahmustaham">
-            <InteractiveHoverButton>Let's Talk</InteractiveHoverButton>
-          </a>
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+            Micah Mustaham
+          </h1>
+          <h2 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">
+            Software Developer @{" "}
+            <a
+              href="https://www.linkedin.com/company/titan-fx/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="italic text-blue-500 hover:text-blue-400 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+            >
+              Titan FX
+            </a>
+          </h2>
+          <p className="text-xs text-zinc-400 dark:text-zinc-500">
+            Laravel · Software Development · Systems Development · AI-Integrated Solutions
+          </p>
+          <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/20 dark:ring-emerald-400/20">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+            Open to freelance work
+          </span>
         </motion.div>
+      </div>
+
+      {/* CTAs */}
+      <motion.div
+        className="flex flex-wrap items-center gap-2"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+      >
+        <InteractiveHoverButton onClick={handleSeeWork} className="w-auto px-6" icon={ArrowRight}>
+          Let's Talk
+        </InteractiveHoverButton>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+        >
+          <Download className="w-3.5 h-3.5" />
+          Résumé
+        </a>
+      </motion.div>
+
+      {/* Location + GitHub */}
+      <motion.div
+        className="flex flex-wrap gap-3 text-xs text-zinc-400 dark:text-zinc-500"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.38 }}
+      >
+        <span className="inline-flex items-center gap-1">
+          <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+          Zamboanga City, Philippines
+        </span>
       </motion.div>
     </div>
   );

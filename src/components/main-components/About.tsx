@@ -1,5 +1,4 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { Github, Globe } from "lucide-react";
 
 interface ExternalLink {
   text: string;
@@ -41,10 +40,10 @@ const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </p>
 );
 
-const aboutContent: AboutContent = {
+export const aboutContent: AboutContent = {
   intro:
-    "Backend engineer specializing in Laravel and API development — and one who actively uses AI agents to build faster and better. I integrate tools like Claude Code into my development workflow for code generation, architecture review, and rapid iteration, letting me move at a pace that would normally require a larger team without sacrificing quality. Across fintech, healthcare, and government projects, I've built and modernized systems that replace manual processes with transparent, auditable backends.",
-  currentRole: "Currently building backend infrastructure and migrating legacy systems at",
+    "Software developer specializing in backend development, with a track record of shipping production-grade systems across healthcare, education, and finance — building and maintaining APIs and multi-tenant platforms in Laravel. I treat AI tooling as a core part of my workflow, not an afterthought: it means faster delivery, tighter architecture, and less rework per sprint. This includes leveraging AI tools to lead legacy-to-modern backend migrations with minimal regression and zero downtime.",
+  currentRole: "Currently doing exactly that at",
   skills: [
     "PHP",
     "Laravel",
@@ -151,29 +150,6 @@ const About = () => {
                 {skill}
               </span>
             ))}
-          </motion.div>
-
-          <motion.div variants={item} className="mt-4 flex flex-wrap gap-2">
-            <a
-              href={aboutContent.links.github.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="GitHub (opens in a new tab)"
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
-            >
-              <Github className="w-3.5 h-3.5" />
-              GitHub
-            </a>
-            <a
-              href={aboutContent.links.portfolio.url}
-              target="_blank"
-              rel="noreferrer noopener"
-              aria-label="Portfolio (opens in a new tab)"
-              className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              Portfolio
-            </a>
           </motion.div>
         </motion.div>
       </motion.div>
