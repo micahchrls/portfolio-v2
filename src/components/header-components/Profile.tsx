@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { Download, MapPin, ArrowRight } from "lucide-react";
 
 export default function Profile() {
-  const handleSeeWork = () => {
-    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
+  const handleLetsTalk = () => {
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -44,8 +44,8 @@ export default function Profile() {
               Titan FX
             </a>
           </h2>
-          <p className="text-xs text-zinc-400 dark:text-zinc-500">
-            Laravel · Software Development · Systems Development · AI-Integrated Solutions
+          <p className="text-sm text-zinc-400 dark:text-zinc-500">
+            Backend engineer — PHP/Laravel. Transactional systems for finance, healthcare, and education.
           </p>
           <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 px-2.5 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-400 ring-1 ring-emerald-600/20 dark:ring-emerald-400/20">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
@@ -61,7 +61,7 @@ export default function Profile() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.3 }}
       >
-        <InteractiveHoverButton onClick={handleSeeWork} className="w-auto px-6" icon={ArrowRight}>
+        <InteractiveHoverButton onClick={handleLetsTalk} className="w-auto px-6" icon={ArrowRight}>
           Let's Talk
         </InteractiveHoverButton>
         <a
@@ -84,7 +84,7 @@ export default function Profile() {
       >
         <span className="inline-flex items-center gap-1">
           <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-          Zamboanga City, Philippines
+          Zamboanga City, Philippines · Open to remote
         </span>
       </motion.div>
     </div>
