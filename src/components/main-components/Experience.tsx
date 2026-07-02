@@ -47,9 +47,20 @@ export default function Experience() {
           </div>
 
           {/* Description */}
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
-            {experience.description}
-          </p>
+          <ul className="space-y-2 mb-4">
+            {experience.bullets.map((bullet) => (
+              <li
+                key={bullet}
+                className="flex gap-2.5 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed"
+              >
+                <span
+                  className="mt-[7px] h-1 w-1 rounded-full bg-emerald-500/70 flex-shrink-0"
+                  aria-hidden="true"
+                />
+                {bullet}
+              </li>
+            ))}
+          </ul>
 
           {/* Skills */}
           <div className="flex flex-wrap gap-2">

@@ -18,7 +18,7 @@ interface Snapshot {
     company: string;
     role: string;
     duration: string;
-    description: string;
+    bullets: string[];
     skills: string[];
   }>;
   certifications: Array<{
@@ -88,12 +88,13 @@ for (const [key, curr] of currExpByKey) {
     expChanges++;
     lines.push(`+ ADDED: "${curr.role}" at ${curr.company}`);
     lines.push(`  Duration:    ${curr.duration}`);
-    lines.push(`  Description: ${curr.description}`);
+    lines.push(`  Description: ${curr.bullets.join('\n               • ')}`);
     lines.push(`  Skills:      ${curr.skills.join(', ')}`);
   } else {
     const fieldChanges: string[] = [];
     if (curr.duration !== prev.duration) fieldChanges.push(`  Duration:    OLD: ${prev.duration}\n               NEW: ${curr.duration}`);
-    if (curr.description !== prev.description) fieldChanges.push(`  Description: OLD: ${prev.description.slice(0, 60)}…\n               NEW: ${curr.description}`);
+    const prevBullets = prev.bullets ?? [];
+    if (curr.bullets.join('\n') !== prevBullets.join('\n')) fieldChanges.push(`  Description: OLD: ${prevBullets.join(' ').slice(0, 60)}…\n               NEW: ${curr.bullets.join('\n               • ')}`);
     const addedS = curr.skills.filter(s => !prev.skills.includes(s));
     const removedS = prev.skills.filter(s => !curr.skills.includes(s));
     if (addedS.length) fieldChanges.push(`  Skills +: ${addedS.join(', ')}`);
@@ -195,7 +196,7 @@ if (isConfirm) {
       company: e.company,
       role: e.role,
       duration: e.duration,
-      description: e.description,
+      bullets: e.bullets,
       skills: e.skills,
     })),
     certifications: certifications.map(c => ({
