@@ -1,6 +1,6 @@
 import { experiences } from '@/data/experiences';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Briefcase } from 'lucide-react';
+import { Briefcase } from 'lucide-react';
 import { Timeline } from '@/components/ui/timeline';
 import { MagicCard } from '@/components/magicui/magic-card';
 
@@ -99,22 +99,6 @@ export default function Experience() {
 
       <div className="group/list w-full">
         <Timeline data={timelineData} />
-        
-        {/* View Resume Link */}
-        <motion.div 
-          variants={item}
-          className="mt-12 flex justify-center md:justify-start md:pl-10"
-        >
-          <a 
-            href="/resume.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-1 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
-          >
-            <span>View Full Résumé</span>
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </motion.div>
       </div>
     </motion.section>
   );
