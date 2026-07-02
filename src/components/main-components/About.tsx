@@ -70,7 +70,7 @@ export const skillGroups: SkillGroup[] = [
 
 export const aboutContent: AboutContent = {
   intro:
-    "Backend engineer with 3+ years building production systems in PHP and Laravel — from hospital and university platforms to a live forex trading system. I own legacy-to-Laravel migrations end to end, build REST APIs and Redis-backed internal tooling, and ship without regressions. Comfortable across the stack in React and TypeScript, and fluent in Python for microservices.",
+    "Backend engineer with 3+ years building and maintaining production systems in PHP and Laravel, from hospital and university platforms to a live forex trading system. I own the hard parts — legacy-to-Laravel migrations, REST APIs, and Redis-backed internal tooling — and ship them without regressions. Comfortable across the stack with React and TypeScript, and fluent in Python for microservices. I treat AI tooling as core to delivery, building reusable Claude skills, agents, and automated tests that speed up each sprint.",
   currentRole: "Currently doing exactly that at",
   skills: skillGroups.flatMap((group) => group.items),
   links: {
