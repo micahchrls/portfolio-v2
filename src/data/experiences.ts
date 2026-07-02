@@ -34,6 +34,16 @@ export interface Experience {
     },
     {
       company: "Ateneo de Zamboanga University",
+      role: "College Professor (Part-time)",
+      duration: "Aug 2023 - Jan 2025",
+      bullets: [
+        "Taught foundational programming, object-oriented programming, and core computer science subjects to CS, IT, and Computer Engineering undergraduates.",
+        "Designed hands-on coursework — labs, projects, and real-world coding scenarios — to bridge the gap between theory and employable software development skills.",
+      ],
+      skills: ["Teaching", "Programming", "OOP", "Mentorship", "Curriculum Design"]
+    },
+    {
+      company: "Ateneo de Zamboanga University",
       role: "System Developer",
       duration: "Jan 2023 - Jun 2024",
       bullets: [
@@ -41,5 +51,26 @@ export interface Experience {
         "Maintained the legacy PHP/MySQL university portal and built a DTR reporting module on raw SQL against existing production schemas — no rewrite, no downtime.",
       ],
       skills: ["PHP", "MySQL", "jQuery", "Ajax", "Raw SQL", "Legacy Systems"]
+    },
+    {
+      company: "Fiverr",
+      role: "Freelance Software Developer",
+      duration: "Apr 2020 - Nov 2021",
+      bullets: [
+        "Took on C++ debugging and optimization contracts alongside web development projects for international clients.",
+        "Built a web-based ordering system for a restaurant client using Django and Bootstrap, replacing their phone-based ordering process.",
+        "Delivered responsive portfolio and business websites in HTML, CSS, and JavaScript across multiple client engagements.",
+      ],
+      skills: ["C++", "Django", "PHP", "Bootstrap", "HTML", "CSS", "JavaScript"]
+    },
+    {
+      company: "Symph",
+      role: "Dev Intern",
+      duration: "Apr 2021 - Jun 2021",
+      bullets: [
+        "Contributed to client product websites using React and Node.js, resolving UI bugs and improving frontend reliability.",
+        "Worked within an Agile team on sprint deliverables, gaining experience with professional code review workflows and production deployments.",
+      ],
+      skills: ["React", "Node.js", "JavaScript", "Git", "Agile Methodology"]
     }
   ];
