@@ -9,7 +9,7 @@ export const testimonials: Testimonial[] = [
   {
     quote: "Micah is an exceptional professional with deep backend development expertise. He writes clean, efficient code and has a strong focus on optimization. His effective communication and positive collaborative approach make him a valuable team member.",
     name: "Rhaidszal Ali",
-    designation: "Senior Frontend Software Engineer at X-Team",
+    designation: "Lead Frontend Engineer at Titan FX",
     src: "/ali.jpg",
   },
   {
