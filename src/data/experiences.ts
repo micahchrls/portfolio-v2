@@ -57,20 +57,21 @@ export interface Experience {
       role: "Freelance Software Developer",
       duration: "Apr 2020 - Nov 2021",
       bullets: [
-        "Took on C++ debugging and optimization contracts alongside web development projects for international clients.",
-        "Built a web-based ordering system for a restaurant client using Django and Bootstrap, replacing their phone-based ordering process.",
-        "Delivered responsive portfolio and business websites in HTML, CSS, and JavaScript across multiple client engagements.",
+        "Built, debugged, and optimized web applications built with Django and Laravel for clients worldwide.",
+        "Developed a web-based ordering system for a pizza company using Django and Bootstrap, improving customer order management.",
+        "Delivered clean, responsive portfolio websites in HTML, CSS, and JavaScript to a global client base.",
       ],
-      skills: ["C++", "Django", "PHP", "Bootstrap", "HTML", "CSS", "JavaScript"]
+      skills: ["Django", "Laravel", "PHP", "PostgreSQL", "Bootstrap", "JavaScript"]
     },
     {
       company: "Symph",
       role: "Dev Intern",
       duration: "Apr 2021 - Jun 2021",
       bullets: [
-        "Contributed to client product websites using React and Node.js, resolving UI bugs and improving frontend reliability.",
-        "Worked within an Agile team on sprint deliverables, gaining experience with professional code review workflows and production deployments.",
+        "Built and debugged client product websites with React and Node.js.",
+        "Streamlined the user experience by resolving bugs and enhancing site functionality, reducing user-reported issues.",
+        "Worked with Linear for task management and GitHub for version control and code collaboration.",
       ],
-      skills: ["React", "Node.js", "JavaScript", "Git", "Agile Methodology"]
+      skills: ["React", "Node.js", "JavaScript", "GitHub", "Linear"]
     }
   ];
