@@ -28,10 +28,10 @@ const heroProjects: HeroProject[] = [
   {
     key: "centrosys",
     title: "CentroSys: Pharmacy Management",
-    role: "Lead Full-Stack Engineer",
+    role: "Sole developer — design to deployment",
     description:
       "Digitized a paper-based pharmacy sales and inventory process end-to-end. Designed the MySQL schema, built a RESTful Laravel API backend, and developed the React frontend. Key decisions included optimistic UI updates for counter staff speed and a batch-import flow for existing inventory records.",
-    outcome: "Reduced inventory discrepancies by 85% within the first month of rollout.",
+    outcome: "In production at a working pharmacy — replaced the paper stock-card process end to end, with every sale and stock movement tracked per transaction.",
     stack: ["Laravel", "React", "TypeScript", "MySQL", "ShadCN", "RESTful API"],
     href: "https://centrosys.online/",
   },
@@ -41,7 +41,7 @@ const heroProjects: HeroProject[] = [
     role: "Lead Full-Stack Engineer",
     description:
       "Built a real-time inventory system for a car-parts business tracking 1,000+ SKUs across multiple product categories. Used Laravel 12 with Inertia.js and React for a seamless SPA experience without a separate API layer — reducing context-switching for the dev team and improving data consistency.",
-    outcome: "Reduced weekly inventory management time by 70%; shipped on Laravel Cloud for zero-downtime deploys.",
+    outcome: "Tracks 1,000+ SKUs in production, deployed on Laravel Cloud with zero-downtime deploys.",
     stack: ["Laravel 12", "Inertia.js", "React", "MySQL", "Laravel Cloud"],
     href: "https://titansys.laravel.cloud/",
   },
@@ -49,18 +49,10 @@ const heroProjects: HeroProject[] = [
 
 const otherProjects: OtherProject[] = [
   {
-    key: "leonora",
-    title: "Leonora: Finance Platform",
-    description:
-      "Personal finance platform with comprehensive loan management capabilities that streamlined financial operations by 65%.",
-    stack: ["PHP", "Bootstrap", "jQuery", "MySQL", "Finance API"],
-    href: "https://leonorafinance.com/",
-  },
-  {
     key: "premiere-telekkom",
     title: "Premiere Telekkom API Portal",
     description:
-      "API-driven dashboard for telecom load transactions processing 500+ daily requests, integrated with DITO API.",
+      "API-driven dashboard for telecom load transactions, integrated with the DITO API and handling 500+ requests daily.",
     stack: ["PHP", "Bootstrap", "MySQL", "Ajax", "jQuery"],
     href: "https://pt.zambo.tech/",
   },

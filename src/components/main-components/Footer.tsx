@@ -30,6 +30,15 @@ const Footer = () => {
               )}
             </span>
           ))}
+          <span className="text-zinc-300 dark:text-zinc-700">·</span>
+          <a
+            href="https://github.com/micahchrls/portfolio-v2"
+            target="_blank"
+            rel="noreferrer noopener"
+            className="text-xs font-medium text-zinc-500 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          >
+            Source on GitHub
+          </a>
         </div>
 
         {/* Bottom bar */}
