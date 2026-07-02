@@ -8,7 +8,7 @@ export default function ContentNav() {
     document.documentElement.style.scrollBehavior = "smooth";
 
     const handleScroll = () => {
-      const sections = ["about", "projects", "experience", "recommendations", "certifications", "contact"];
+      const sections = ["about", "experience", "recommendations", "certifications", "contact"];
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
 
@@ -51,7 +51,6 @@ export default function ContentNav() {
 
   const navItems = [
     { id: "about", label: "About" },
-    { id: "projects", label: "Projects" },
     { id: "experience", label: "Experience" },
     { id: "recommendations", label: "Recommendations" },
     { id: "certifications", label: "Certifications" },

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, FolderKanban, Star, Mail, User2 } from "lucide-react";
+import { Award, Briefcase, Star, Mail, User2 } from "lucide-react";
 
 const navItems = [
   { id: "about", label: "About", icon: User2 },
-  { id: "projects", label: "Projects", icon: FolderKanban },
   { id: "experience", label: "Work", icon: Briefcase },
   { id: "recommendations", label: "Reviews", icon: Star },
+  { id: "certifications", label: "Certs", icon: Award },
   { id: "contact", label: "Contact", icon: Mail },
 ];
 

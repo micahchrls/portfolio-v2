@@ -1,9 +1,11 @@
 import { certifications } from '@/data/certifications';
-import { motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Award, ArrowUpRight } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Certifications() {
   const shouldReduceMotion = useReducedMotion();
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const container = {
     hidden: { opacity: 0 },
@@ -56,24 +58,48 @@ export default function Certifications() {
           </div>
         </div>
 
-        <ul className="space-y-2.5 pl-8">
-          {certifications.map((cert) => (
-            <li key={cert.name} className="flex items-center justify-between gap-4">
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">
-                {cert.name}
-              </span>
-              {cert.credentialUrl && (
-                <a
-                  href={cert.credentialUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-0.5 text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex-shrink-0"
-                  aria-label={`Verify ${cert.name} credential`}
-                >
-                  Verify
-                  <ArrowUpRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-              )}
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+          {certifications.map((cert, idx) => (
+            <li
+              key={cert.name}
+              className="relative"
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <AnimatePresence>
+                {hoveredIndex === idx && (
+                  <motion.span
+                    className="absolute inset-0 rounded-md bg-emerald-400/10"
+                    layoutId={shouldReduceMotion ? undefined : 'certHoverBackground'}
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.2, ease: 'easeOut' },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.15, ease: 'easeOut' },
+                    }}
+                  />
+                )}
+              </AnimatePresence>
+              <a
+                href={cert.credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Verify ${cert.name} credential`}
+                className="group relative flex items-start justify-between gap-3 rounded-md px-3 py-2.5"
+              >
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                    {cert.name}
+                  </p>
+                  <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">
+                    {cert.issuedDate}
+                  </p>
+                </div>
+                <ArrowUpRight className="h-3.5 w-3.5 flex-shrink-0 mt-1 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </li>
           ))}
         </ul>
