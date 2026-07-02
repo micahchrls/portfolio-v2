@@ -6,6 +6,11 @@ interface ExternalLink {
   label: string;
 }
 
+interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
 interface AboutContent {
   intro: string;
   currentRole: string;
@@ -40,26 +45,34 @@ const Paragraph: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </p>
 );
 
+export const skillGroups: SkillGroup[] = [
+  {
+    label: "Backend",
+    items: ["PHP", "Laravel", "Filament", "REST API Design", "Eloquent ORM", "Python", "FastAPI"],
+  },
+  {
+    label: "Databases & Caching",
+    items: ["MySQL", "PostgreSQL", "Redis", "Query Optimization", "Schema Design"],
+  },
+  {
+    label: "Frontend",
+    items: ["React", "TypeScript", "Inertia.js", "Tailwind CSS", "shadcn/ui"],
+  },
+  {
+    label: "AI & LLM Integration",
+    items: ["Claude API", "Agentic Workflows", "Reusable Skills & Agents", "OpenAI & Gemini APIs"],
+  },
+  {
+    label: "DevOps & Tools",
+    items: ["Git", "Docker", "AWS", "CI/CD", "Laravel Cloud"],
+  },
+];
+
 export const aboutContent: AboutContent = {
   intro:
-    "Software developer specializing in backend development, with a track record of shipping production-grade systems across healthcare, education, and finance — building and maintaining APIs and multi-tenant platforms in Laravel. I treat AI tooling as a core part of my workflow, not an afterthought: it means faster delivery, tighter architecture, and less rework per sprint. This includes leveraging AI tools to lead legacy-to-modern backend migrations with minimal regression and zero downtime.",
+    "Backend engineer with 3+ years building production systems in PHP and Laravel — from hospital and university platforms to a live forex trading system. I own legacy-to-Laravel migrations end to end, build REST APIs and Redis-backed internal tooling, and ship without regressions. Comfortable across the stack in React and TypeScript, and fluent in Python for microservices.",
   currentRole: "Currently doing exactly that at",
-  skills: [
-    "PHP",
-    "Laravel",
-    "Python",
-    "FastAPI",
-    "React",
-    "TypeScript",
-    "MySQL",
-    "PostgreSQL",
-    "API Development",
-    "AI Agents",
-    "LLM Integration",
-    "Database Optimization",
-    "Eloquent ORM",
-    "Git",
-  ],
+  skills: skillGroups.flatMap((group) => group.items),
   links: {
     workplace: {
       text: "Titan FX",
@@ -133,22 +146,30 @@ const About = () => {
               <Paragraph>
                 {aboutContent.currentRole}{" "}
                 <ExternalLink {...aboutContent.links.workplace} />, a global
-                forex brokerage, where I build new features and lead legacy
-                system migrations using an AI-augmented development process.
-                I bring the same approach to freelance projects — if you need
-                a backend system built or modernized, I can help.
+                forex broker, where correctness and latency are the product.
+                I bring the same discipline to freelance work — if you need a
+                backend built, migrated, or un-stuck, I can help.
               </Paragraph>
             </motion.div>
           </div>
 
-          <motion.div variants={item} className="flex flex-wrap gap-2">
-            {aboutContent.skills.map((skill) => (
-              <span
-                key={skill}
-                className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md"
-              >
-                {skill}
-              </span>
+          <motion.div variants={item} className="space-y-4">
+            {skillGroups.map((group) => (
+              <div key={group.label}>
+                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2">
+                  {group.label}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </motion.div>
         </motion.div>
