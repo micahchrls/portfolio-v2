@@ -37,7 +37,7 @@ export default function Experience() {
         <div className="p-6">
           {/* Header */}
           <div className="flex flex-col gap-2 mb-3">
-            <h3 className="font-display text-2xl text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
+            <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
               <Briefcase className="w-5 h-5 flex-shrink-0" />
               {experience.role}
             </h3>

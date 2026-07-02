@@ -1,4 +1,5 @@
 import { testimonials } from "@/data/recommendations";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 import { motion, useReducedMotion } from "framer-motion";
 
 export default function Recommendations() {
@@ -39,36 +40,8 @@ export default function Recommendations() {
         </h2>
       </motion.div>
 
-      <motion.div
-        variants={container}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4"
-      >
-        {testimonials.map((t) => (
-          <motion.div
-            key={t.name}
-            variants={item}
-            className="flex flex-col gap-4 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-5"
-          >
-            <p className="text-sm leading-6 text-zinc-600 dark:text-zinc-400 flex-1">
-              &ldquo;{t.quote}&rdquo;
-            </p>
-            <div className="flex items-center gap-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-              <img
-                src={t.src}
-                alt={t.name}
-                className="w-9 h-9 rounded-full object-cover flex-shrink-0"
-              />
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">
-                  {t.name}
-                </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-tight">
-                  {t.designation}
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        ))}
+      <motion.div variants={item}>
+        <AnimatedTestimonials testimonials={testimonials} />
       </motion.div>
     </motion.section>
   );

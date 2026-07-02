@@ -120,7 +120,7 @@ export default function Projects() {
               <div className="p-6 space-y-4">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <h3 className="font-display text-2xl text-zinc-900 dark:text-zinc-100">
+                    <h3 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
                       {project.title}
                     </h3>
                     <p className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mt-0.5">

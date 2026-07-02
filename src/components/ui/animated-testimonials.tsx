@@ -1,9 +1,6 @@
-"use client";
-
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { useEffect, useState, useCallback, memo } from "react";
-import { IconQuote, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { LazyMotion, domAnimation } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
+import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 type Testimonial = {
   quote: string;
@@ -20,203 +17,128 @@ const slideVariants = {
   center: {
     x: 0,
     opacity: 1,
-    transition: {
-      duration: 0.3,
-      ease: 'easeOut'
-    }
+    transition: { duration: 0.3, ease: "easeOut" },
   },
   exit: (direction: number) => ({
     x: direction < 0 ? 20 : -20,
     opacity: 0,
-    transition: { 
-      duration: 0.2,
-      ease: 'easeIn'
-    }
-  })
+    transition: { duration: 0.15, ease: "easeOut" },
+  }),
 };
 
-// Memoized navigation button component
-const NavigationButton = memo(({ onClick, icon: Icon }: { 
-  onClick: () => void;
-  icon: typeof IconChevronLeft | typeof IconChevronRight;
-}) => (
-  <motion.button
-    onClick={onClick}
-    className="group h-8 w-8 sm:h-10 sm:w-10 rounded-full flex items-center justify-center pointer-events-auto transition-all"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400 dark:text-gray-500 group-hover:text-gray-900 dark:group-hover:text-gray-100 transition-colors" />
-  </motion.button>
-));
-
-NavigationButton.displayName = 'NavigationButton';
-
-// Memoized pagination dot component
-const PaginationDot = memo(({ isActive, onClick }: { 
-  isActive: boolean;
-  onClick: () => void;
-}) => (
-  <motion.button
-    onClick={onClick}
-    className={`group transition-all ${
-      isActive ? "w-6 sm:w-8" : "w-2 sm:w-2 hover:w-4"
-    }`}
-    whileHover={{ scale: 1.1 }}
-    whileTap={{ scale: 0.95 }}
-  >
-    <div 
-      className={`h-0.5 sm:h-[2px] rounded-full transition-all duration-300 ${
-        isActive 
-          ? "bg-blue-500/70 dark:bg-blue-400/70" 
-          : "bg-gray-300/50 dark:bg-gray-700/50 group-hover:bg-gray-400 dark:group-hover:bg-gray-500"
-      }`}
-    />
-  </motion.button>
-));
-
-PaginationDot.displayName = 'PaginationDot';
-
-export const AnimatedTestimonials = memo(({ testimonials }: { testimonials: Testimonial[] }) => {
+export const AnimatedTestimonials = ({
+  testimonials,
+}: {
+  testimonials: Testimonial[];
+}) => {
   const [[page, direction], setPage] = useState([0, 0]);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  const paginate = useCallback((newDirection: number) => {
-    setPage(([currentPage]) => [
-      (currentPage + newDirection + testimonials.length) % testimonials.length,
-      newDirection
-    ]);
-  }, [testimonials.length]);
+  const paginate = useCallback(
+    (newDirection: number) => {
+      setPage(([currentPage]) => [
+        (currentPage + newDirection + testimonials.length) % testimonials.length,
+        newDirection,
+      ]);
+    },
+    [testimonials.length]
+  );
 
   useEffect(() => {
-    if (!isHovered) {
-      const timer = setInterval(() => paginate(1), 5000);
-      return () => clearInterval(timer);
-    }
-  }, [isHovered, paginate]);
+    if (isPaused || shouldReduceMotion) return;
+    const timer = setInterval(() => paginate(1), 6000);
+    return () => clearInterval(timer);
+  }, [isPaused, shouldReduceMotion, paginate]);
+
+  const current = testimonials[page];
 
   return (
-    <LazyMotion features={domAnimation}>
-      <div 
-        className="relative w-full max-w-6xl mx-auto px-3 sm:px-6 py-8 sm:py-12"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        <div className="relative max-w-4xl mx-auto">
-          <div className="relative h-full min-h-[500px] sm:min-h-[400px] md:min-h-[450px] w-full">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
-                key={`testimonial-${page}`}
-                custom={direction}
-                variants={shouldReduceMotion ? undefined : slideVariants}
-                initial={shouldReduceMotion ? { opacity: 0 } : "enter"}
-                animate={shouldReduceMotion ? { opacity: 1 } : "center"}
-                exit={shouldReduceMotion ? { opacity: 0 } : "exit"}
-                transition={shouldReduceMotion ? { duration: 0.15 } : undefined}
-                className="absolute inset-0"
-              >
-                <div className="h-full w-full overflow-hidden">
-                  <div className="h-full flex flex-col md:grid md:grid-cols-[1fr_3fr] gap-4 sm:gap-6 p-4 sm:p-6 md:p-8">
-                    {/* Image Section */}
-                    <div className="flex items-center justify-center">
-                      <motion.div 
-                        className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-xl overflow-hidden group"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <div className="relative h-full w-full">
-                          <img
-                            src={testimonials[page].src}
-                            alt={testimonials[page].name}
-                            loading="lazy"
-                            width="192"
-                            height="192"
-                            sizes="(max-width: 768px) 96px, (max-width: 1024px) 128px, 192px"
-                            className="object-cover object-center transition-all duration-500 ease-out will-change-transform"
-                            style={{
-                              transform: 'scale(1.1)',
-                              filter: 'grayscale(0%)',
-                            }}
-                          />
-                        </div>
-                        <motion.div 
-                          className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 0.1 }}
-                        />
-                      </motion.div>
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="flex flex-col justify-between py-2 mt-8">
-                      <div>
-                        <IconQuote 
-                          className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500/30 dark:text-blue-400/30 mb-3 sm:mb-4" 
-                          stroke={1}
-                        />
-                        <motion.div 
-                          className="relative"
-                          initial={{ opacity: 0, y: 5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <motion.p 
-                            className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
-                          >
-                            {testimonials[page].quote}
-                          </motion.p>
-                        </motion.div>
-                      </div>
-
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-4 sm:mt-6"
-                      >
-                        <h3 className="text-base sm:text-lg font-medium text-gray-900 dark:text-white">
-                          {testimonials[page].name}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-                          {testimonials[page].designation}
-                        </p>
-                      </motion.div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation Buttons */}
-            <div className="absolute -left-2 -right-2 sm:-left-4 md:-left-12 sm:right-0 top-1/2 -translate-y-1/2 flex justify-between pointer-events-none">
-              <NavigationButton
-                onClick={() => paginate(-1)}
-                icon={IconChevronLeft}
+    <div
+      className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
+    >
+      <div className="relative min-h-[240px] sm:min-h-[200px] p-6 sm:p-8">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={`testimonial-${page}`}
+            custom={direction}
+            variants={shouldReduceMotion ? undefined : slideVariants}
+            initial={shouldReduceMotion ? { opacity: 0 } : "enter"}
+            animate={shouldReduceMotion ? { opacity: 1 } : "center"}
+            exit={shouldReduceMotion ? { opacity: 0 } : "exit"}
+            transition={shouldReduceMotion ? { duration: 0.15 } : undefined}
+            className="flex flex-col gap-5"
+          >
+            <Quote
+              className="h-5 w-5 text-emerald-500/50"
+              aria-hidden="true"
+            />
+            <blockquote className="text-sm sm:text-base leading-7 text-zinc-600 dark:text-zinc-400">
+              &ldquo;{current.quote}&rdquo;
+            </blockquote>
+            <div className="flex items-center gap-3 mt-auto">
+              <img
+                src={current.src}
+                alt={current.name}
+                loading="lazy"
+                className="w-10 h-10 rounded-full object-cover flex-shrink-0"
               />
-              <NavigationButton
-                onClick={() => paginate(1)}
-                icon={IconChevronRight}
-              />
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                  {current.name}
+                </p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-tight">
+                  {current.designation}
+                </p>
+              </div>
             </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
-            {/* Pagination Dots */}
-            <div className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3">
-              {testimonials.map((_, index) => (
-                <PaginationDot
-                  key={`dot-${index}`}
-                  isActive={index === page}
-                  onClick={() => setPage([index, index > page ? 1 : -1])}
-                />
-              ))}
-            </div>
-          </div>
+      {/* Controls */}
+      <div className="flex items-center justify-between px-6 sm:px-8 pb-5">
+        <div
+          className="flex items-center gap-2"
+          role="tablist"
+          aria-label="Recommendations"
+        >
+          {testimonials.map((t, index) => (
+            <button
+              key={t.name}
+              role="tab"
+              aria-selected={index === page}
+              aria-label={`Recommendation from ${t.name}`}
+              onClick={() => setPage([index, index > page ? 1 : -1])}
+              className={`h-1 rounded-full transition-[width,background-color] duration-300 ${
+                index === page
+                  ? "w-8 bg-emerald-500/80"
+                  : "w-2 bg-zinc-300 dark:bg-zinc-700 hover:bg-zinc-400 dark:hover:bg-zinc-500"
+              }`}
+            />
+          ))}
+        </div>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => paginate(-1)}
+            aria-label="Previous recommendation"
+            className="h-8 w-8 rounded-md flex items-center justify-center text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-200 active:scale-95"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            onClick={() => paginate(1)}
+            aria-label="Next recommendation"
+            className="h-8 w-8 rounded-md flex items-center justify-center text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors duration-200 active:scale-95"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
         </div>
       </div>
-    </LazyMotion>
+    </div>
   );
-});
-
-AnimatedTestimonials.displayName = 'AnimatedTestimonials';
+};

@@ -56,7 +56,7 @@ export default function Contact() {
       </motion.div>
 
       <motion.div variants={item} className="mb-8">
-        <h2 className="font-display text-2xl font-bold text-zinc-800 dark:text-zinc-200 mb-2">
+        <h2 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-200 mb-2">
           Get in touch
         </h2>
         <p className="text-base text-zinc-600 dark:text-zinc-400 max-w-md mb-4">
