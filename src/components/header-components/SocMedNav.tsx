@@ -7,7 +7,7 @@ export default function SocMedNav() {
       <ul className="ml-1 xl:mt-8 flex items-center" aria-label="Social media">
         <li className="mr-5 shrink-0 text-xs">
           <a
-            className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
+            className="block text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100 transition-colors duration-200"
             href="https://github.com/micahchrls"
             target="_blank"
             rel="noreferrer noopener"
@@ -28,7 +28,7 @@ export default function SocMedNav() {
         </li>
         <li className="mr-5 shrink-0 text-xs">
           <a
-            className="block transition-all duration-300 ease-in-out hover:text-slate-200 hover:scale-110"
+            className="block text-zinc-400 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-100 transition-colors duration-200"
             href="https://www.linkedin.com/in/micah-mustaham/"
             target="_blank"
             rel="noreferrer noopener"

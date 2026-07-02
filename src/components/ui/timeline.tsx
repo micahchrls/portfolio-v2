@@ -35,7 +35,7 @@ const TimelineItem = ({ item }: { item: TimelineEntry }) => {
 
       {/* Date */}
       <h3
-        className={`text-sm mb-3 transition-all duration-300 ${
+        className={`text-sm mb-3 transition-colors duration-300 ${
           isInView
             ? "font-bold text-zinc-900 dark:text-zinc-100"
             : "font-medium text-zinc-500 dark:text-zinc-500"

@@ -8,7 +8,7 @@ export function ThemeToggle() {
   return (
     <motion.button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative ml-1 xl:mt-8 h-10 w-10 rounded-xl bg-white/10 backdrop-blur-sm dark:bg-gray-800/10 border border-gray-200/20 dark:border-gray-700/20 hover:border-indigo-500/50 dark:hover:border-indigo-400/50 transition-all duration-300"
+      className="relative ml-1 xl:mt-8 h-10 w-10 rounded-xl bg-white/50 backdrop-blur-sm dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors duration-200"
       aria-label="Toggle theme"
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
@@ -25,7 +25,7 @@ export function ThemeToggle() {
         >
           {isDark ? (
             <svg
-              className="h-4 w-4 text-indigo-400"
+              className="h-4 w-4 text-zinc-300"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -38,7 +38,7 @@ export function ThemeToggle() {
             </svg>
           ) : (
             <svg
-              className="h-6 w-6 text-amber-400"
+              className="h-4 w-4 text-zinc-600"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
