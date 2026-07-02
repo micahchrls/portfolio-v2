@@ -106,11 +106,11 @@ export default function Projects() {
       </motion.div>
 
       {/* Hero case studies */}
-      <motion.div variants={container} className="space-y-8 mb-12">
+      <motion.div variants={container} className="group/list space-y-8 mb-12">
         {heroProjects.map((project) => (
           <motion.div key={project.key} variants={item}>
             <MagicCard
-              className="rounded-lg border border-zinc-200 dark:border-zinc-800"
+              className="rounded-lg border border-zinc-200 dark:border-zinc-800 transition-opacity duration-300 lg:group-hover/list:opacity-60 lg:hover:!opacity-100"
               gradientColor="#14532d"
               gradientFrom="#22c55e"
               gradientTo="#10b981"
@@ -120,7 +120,7 @@ export default function Projects() {
               <div className="p-6 space-y-4">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+                    <h3 className="font-display text-2xl text-zinc-900 dark:text-zinc-100">
                       {project.title}
                     </h3>
                     <p className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mt-0.5">
@@ -147,7 +147,7 @@ export default function Projects() {
                         className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
                         aria-label={`${project.title} live site`}
                       >
-                        <ExternalLink className="h-4 w-4" />
+                        <ExternalLink className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </a>
                     )}
                   </div>
@@ -167,7 +167,7 @@ export default function Projects() {
                   {project.stack.map((tech) => (
                     <li
                       key={tech}
-                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md"
+                      className="inline-flex items-center px-2.5 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-400/10 rounded-md"
                     >
                       {tech}
                     </li>
@@ -184,11 +184,11 @@ export default function Projects() {
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-4">
           Other work
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="group/list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {otherProjects.map((project) => (
             <div
               key={project.key}
-              className="rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-4 flex flex-col gap-3"
+              className="group rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/40 p-4 flex flex-col gap-3 transition-[opacity,border-color] duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 lg:group-hover/list:opacity-60 lg:hover:!opacity-100"
             >
               <div className="flex items-start justify-between gap-2">
                 <h4 className="text-sm font-semibold text-zinc-800 dark:text-zinc-200 leading-tight">
@@ -214,7 +214,7 @@ export default function Projects() {
                       className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
                       aria-label={`${project.title} live site`}
                     >
-                      <ArrowUpRight className="h-3.5 w-3.5" />
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </a>
                   )}
                 </div>
@@ -226,7 +226,7 @@ export default function Projects() {
                 {project.stack.map((tech) => (
                   <li
                     key={tech}
-                    className="inline-flex items-center px-2 py-0.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 rounded"
+                    className="inline-flex items-center px-2 py-0.5 text-xs font-medium text-emerald-700 dark:text-emerald-300/90 bg-emerald-400/10 rounded"
                   >
                     {tech}
                   </li>

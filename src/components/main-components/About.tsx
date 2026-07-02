@@ -26,7 +26,7 @@ const ExternalLink: React.FC<ExternalLink & { className?: string }> = ({
   text,
   url,
   label,
-  className = "font-medium text-zinc-800 hover:text-zinc-600 dark:text-zinc-200 dark:hover:text-zinc-50 focus-visible:text-zinc-600 dark:focus-visible:text-zinc-50 transition-colors duration-200",
+  className = "font-medium text-zinc-800 dark:text-zinc-200 underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-4 hover:decoration-emerald-500 dark:hover:decoration-emerald-400 focus-visible:decoration-emerald-500 transition-colors duration-200",
 }) => (
   <a
     className={className}

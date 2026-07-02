@@ -27,7 +27,7 @@ export default function Experience() {
     title: experience.duration,
     content: (
       <MagicCard
-        className="rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-default"
+        className="rounded-lg border border-zinc-200 dark:border-zinc-800 cursor-default transition-opacity duration-300 lg:group-hover/list:opacity-60 lg:hover:!opacity-100"
         gradientColor="#14532d"
         gradientFrom="#22c55e"
         gradientTo="#10b981"
@@ -37,7 +37,7 @@ export default function Experience() {
         <div className="p-6">
           {/* Header */}
           <div className="flex flex-col gap-2 mb-3">
-            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <h3 className="font-display text-2xl text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
               <Briefcase className="w-5 h-5 flex-shrink-0" />
               {experience.role}
             </h3>
@@ -67,7 +67,7 @@ export default function Experience() {
             {experience.skills.map((skill) => (
               <span
                 key={skill}
-                className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 rounded-md hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                className="inline-flex items-center px-3 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-400/10 rounded-md"
               >
                 {skill}
               </span>
@@ -97,7 +97,7 @@ export default function Experience() {
         </motion.h2>
       </motion.div>
 
-      <div className="w-full">
+      <div className="group/list w-full">
         <Timeline data={timelineData} />
         
         {/* View Resume Link */}

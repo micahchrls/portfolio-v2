@@ -30,7 +30,7 @@ export default function Profile() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
         >
-          <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+          <h1 className="font-display text-3xl tracking-tight text-zinc-900 dark:text-zinc-100">
             Micah Mustaham
           </h1>
           <h2 className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">
